@@ -3,7 +3,6 @@
 :root {
   --primary-color: #2196f3;
   --accent-color: #ff9800;
-  --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --auth-required: #1976d2;
   --auth-optional: #388e3c;
   --auth-conditional: #f57c00;
@@ -11,6 +10,8 @@
   --warning-color: #ff9800;
   --error-color: #f44336;
   --info-color: #2196f3;
+  --icon-color: #666666;
+  --icon-color-dark: #333333;
 }
 
 /* Authentication Status Indicators */
@@ -146,15 +147,12 @@
   opacity: 0.8;
 }
 
-/* Premium styling enhancements */
+/* Remove gradient from headers - use simple dark color */
 .md-content h1 {
-  background: var(--gradient-bg);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--icon-color-dark);
 }
 
-/* Enhanced table styling */
+/* Enhanced table styling - remove gradients */
 table {
   border-radius: 8px;
   overflow: hidden;
@@ -164,11 +162,12 @@ table {
 }
 
 table th {
-  background: linear-gradient(135deg, var(--primary-color), rgba(33, 150, 243, 0.8));
-  color: white;
+  background-color: #f8f9fa;
+  color: var(--icon-color-dark);
   font-weight: 600;
   text-align: center;
   padding: 12px;
+  border-bottom: 2px solid #e9ecef;
 }
 
 table td {
@@ -193,9 +192,9 @@ table tr:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* Button-like links */
+/* Simple button-like links without gradients */
 a[href^="https://arafat2.me/api/"] {
-  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  background-color: var(--primary-color);
   color: white !important;
   padding: 6px 12px;
   border-radius: 6px;
@@ -207,6 +206,7 @@ a[href^="https://arafat2.me/api/"] {
 }
 
 a[href^="https://arafat2.me/api/"]:hover {
+  background-color: #1976d2;
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

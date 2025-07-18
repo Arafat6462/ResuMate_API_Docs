@@ -1,4 +1,4 @@
-# 🔌 ResuMate API Documentation
+# 🔗 ResuMate API Documentation
 
 !!! info "API Configuration"
     **Base URL**
@@ -675,4 +675,4 @@ Authorization: Bearer <your-jwt-token>
 *This API documentation is automatically generated and kept up-to-date with the latest ResuMate API version.*
 
 !!! abstract "API Status"
-    :material-check-circle:{ .color-success } **Live** • :material-update:{ style="color: #666" } Last Updated: January 2025 • :material-api:{ style="color: #666" } Version 1.0
+    :material-check-circle:{ .color-success } **Live** • :material-update:{ style="color: #666" } Last Updated: July 2025 • :material-api:{ style="color: #666" } Version 1.0
