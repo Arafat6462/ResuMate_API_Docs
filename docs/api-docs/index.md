@@ -13,7 +13,7 @@
 
 ResuMate API provides **user management**, **resume CRUD operations**, **AI-powered resume generation** (Google Gemini, OpenRouter), **job application tracking**, and **PostgreSQL persistence** with both authenticated and anonymous access.
 
-**Key Features:** :material-shield-check:{ style="color: #666" } JWT Authentication • :material-file-document-multiple:{ style="color: #666" } Full Resume Management • :material-brain:{ style="color: #666" } Multiple AI Models • :material-briefcase:{ style="color: #666" } Job Tracking • :material-eye:{ style="color: #666" } Example Data
+**Key Features:** :material-shield-check:{ style="color: #4caf50" } JWT Authentication • :material-file-document-multiple:{ style="color: #2196f3" } Full Resume Management • :material-brain:{ style="color: #9c27b0" } Multiple AI Models • :material-briefcase:{ style="color: #ff9800" } Job Tracking • :material-eye:{ style="color: #607d8b" } Example Data
 
 !!! tip "Live Testing"
     Try the API instantly: [List AI Models](https://arafat2.me/api/ai/models/) • [Example Applications](https://arafat2.me/api/example-job-applications/) • [API Root](https://arafat2.me/api/)
@@ -109,7 +109,7 @@ Authorization: Bearer <your-jwt-token>
     === ":material-format-list-bulleted: **List Resumes**"
         
         !!! info "GET `/api/resumes/`"
-            **Authentication:** :material-shield-check:{ .auth-required } Required  
+            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required  
             **Description:** Retrieve all resumes for the authenticated user
         
         **Sample Request:**
@@ -134,7 +134,7 @@ Authorization: Bearer <your-jwt-token>
     === ":material-plus: **Create Resume**"
         
         !!! success "POST `/api/resumes/`"
-            **Authentication:** :material-shield-check:{ .auth-required } Required
+            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required
         
         **Request Body:**
         ```json
@@ -147,17 +147,17 @@ Authorization: Bearer <your-jwt-token>
     === ":material-file-document: **Get Resume**"
         
         !!! info "GET `/api/resumes/{id}/`"
-            **Authentication:** :material-shield-check:{ .auth-required } Required
+            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required
 
     === ":material-pencil: **Update Resume**"
         
         !!! warning "PUT/PATCH `/api/resumes/{id}/`"
-            **Authentication:** :material-shield-check:{ .auth-required } Required
+            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required
 
     === ":material-delete: **Delete Resume**"
         
         !!! danger "DELETE `/api/resumes/{id}/`"
-            **Authentication:** :material-shield-check:{ .auth-required } Required
+            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required
 
 ### 🤖 AI-Powered Resume Generation
 
@@ -168,7 +168,7 @@ Authorization: Bearer <your-jwt-token>
     === ":material-brain: **List AI Models**"
         
         !!! success "GET `/api/ai/models/`"
-            **Authentication:** :material-shield-off:{ .auth-optional } Not Required
+            **Authentication:** :material-shield-off:{ style="color: #9e9e9e" } Not Required
         
         **Sample Request:**
         ```bash
@@ -196,7 +196,7 @@ Authorization: Bearer <your-jwt-token>
     === ":material-auto-fix: **Generate Resume**"
         
         !!! info "POST `/api/ai/generate/`"
-            **Authentication:** :material-shield-half-full:{ .auth-conditional } Optional (depends on selected model)
+            **Authentication:** :material-shield-half-full:{ style="color: #ff9800" } Optional (depends on selected model)
         
         **Request Body:**
         ```json
@@ -224,7 +224,7 @@ Authorization: Bearer <your-jwt-token>
     === ":material-clipboard-list: **List Applications**"
         
         !!! info "GET `/api/job-applications/`"
-            **Authentication:** :material-shield-check:{ .auth-required } Required
+            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required
         
         **Sample Request:**
         ```bash
@@ -255,7 +255,7 @@ Authorization: Bearer <your-jwt-token>
     === ":material-plus: **Create Application**"
         
         !!! success "POST `/api/job-applications/`"
-            **Authentication:** :material-shield-check:{ .auth-required } Required
+            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required
         
         **Request Body:**
         ```json
@@ -273,18 +273,18 @@ Authorization: Bearer <your-jwt-token>
     === ":material-pencil: **Update Application**"
         
         !!! warning "PUT/PATCH `/api/job-applications/{id}/`"
-            **Authentication:** :material-shield-check:{ .auth-required } Required
+            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required
 
     === ":material-delete: **Delete Application**"
         
         !!! danger "DELETE `/api/job-applications/{id}/`"
-            **Authentication:** :material-shield-check:{ .auth-required } Required  
+            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required  
             **Note:** This performs a soft delete (sets `is_deleted=true`)
 
     === ":material-eye: **Example Applications**"
         
         !!! tip "GET `/api/example-job-applications/`"
-            **Authentication:** :material-shield-off:{ .auth-optional } Not Required  
+            **Authentication:** :material-shield-off:{ style="color: #9e9e9e" } Not Required  
             **Description:** Returns up to 5 sample job applications for demo purposes
 
 ---
@@ -364,15 +364,19 @@ Authorization: Bearer <your-jwt-token>
 
 ### Standard HTTP Status Codes
 
+<div class="premium-table status-table">
+
 | Status Code | Description | Status |
-|:-----------:|-------------|--------|
-| :material-check-circle:{ .status-success } **200** | OK - Request successful | :material-circle:{ .color-success } Success |
-| :material-plus-circle:{ .status-success } **201** | Created - Resource created successfully | :material-circle:{ .color-success } Success |
-| :material-alert-circle:{ .status-warning } **400** | Bad Request - Invalid request data | :material-circle:{ .color-warning } Warning |
-| :material-lock:{ .status-error } **401** | Unauthorized - Authentication required | :material-circle:{ .color-error } Error |
-| :material-cancel:{ .status-error } **403** | Forbidden - Insufficient permissions | :material-circle:{ .color-error } Error |
-| :material-help-circle:{ .status-info } **404** | Not Found - Resource not found | :material-circle:{ .color-info } Info |
-| :material-server-network:{ .status-error } **503** | Service Unavailable - AI service error | :material-circle:{ .color-error } Error |
+|:-----------:|:------------|:-------|
+| :material-check-circle:{ style="color: #4caf50" } **200** | OK - Request successful | <span class="status-badge success">✅ Success</span> |
+| :material-plus-circle:{ style="color: #4caf50" } **201** | Created - Resource created successfully | <span class="status-badge success">✅ Success</span> |
+| :material-alert-circle:{ style="color: #ff9800" } **400** | Bad Request - Invalid request data | <span class="status-badge warning">⚠️ Warning</span> |
+| :material-lock:{ style="color: #f44336" } **401** | Unauthorized - Authentication required | <span class="status-badge error">❌ Error</span> |
+| :material-cancel:{ style="color: #f44336" } **403** | Forbidden - Insufficient permissions | <span class="status-badge error">❌ Error</span> |
+| :material-help-circle:{ style="color: #2196f3" } **404** | Not Found - Resource not found | <span class="status-badge info">ℹ️ Info</span> |
+| :material-server-network:{ style="color: #f44336" } **503** | Service Unavailable - AI service error | <span class="status-badge error">❌ Error</span> |
+
+</div>
 
 ### Error Response Format
 ```json
@@ -421,9 +425,9 @@ Authorization: Bearer <your-jwt-token>
 !!! info "Rate Limits"
     API usage limits to ensure fair access and service stability.
 
-- :material-robot:{ style="color: #666" } **AI Models**: Some models may have daily limits per user (configurable per model)
-- :material-account-off:{ style="color: #666" } **Anonymous Users**: Limited access to certain AI models
-- :material-account-check:{ style="color: #666" } **Authenticated Users**: Higher rate limits and access to premium models
+- :material-robot:{ style="color: #9c27b0" } **AI Models**: Some models may have daily limits per user (configurable per model)
+- :material-account-off:{ style="color: #f44336" } **Anonymous Users**: Limited access to certain AI models
+- :material-account-check:{ style="color: #4caf50" } **Authenticated Users**: Higher rate limits and access to premium models
 
 ---
 
@@ -589,11 +593,19 @@ Authorization: Bearer <your-jwt-token>
 
 === "Backend Technologies"
     
-    - :material-language-python:{ style="color: #666" } **Backend**: Django 5.0.14, Django REST Framework
-    - :material-database:{ style="color: #666" } **Database**: PostgreSQL with psycopg2-binary  
-    - :material-key:{ style="color: #666" } **Authentication**: djangorestframework-simplejwt
-    - :material-robot:{ style="color: #666" } **AI Integration**: Google Genai, OpenAI SDK
-    - :material-server:{ style="color: #666" } **Deployment**: Gunicorn, WhiteNoise for static files
+    <div class="premium-table backend-tech-table">
+    
+    | Technology | Component | Purpose |
+    |:----------:|:---------:|:--------|
+    | **🐍 Backend** | <span class="tech-highlight">Django 5.0.14</span> | Web framework & REST API |
+    | **🗄️ Database** | <span class="tech-highlight">PostgreSQL</span> | Primary data storage with psycopg2-binary |
+    | **🔐 Authentication** | <span class="tech-highlight">JWT Tokens</span> | djangorestframework-simplejwt |
+    | **🤖 AI Integration** | <span class="tech-highlight">Google Genai</span> | AI-powered resume generation |
+    | **🔀 AI Router** | <span class="tech-highlight">OpenAI SDK</span> | Multiple AI model support |
+    | **🚀 Deployment** | <span class="tech-highlight">Gunicorn</span> | Production WSGI server |
+    | **📁 Static Files** | <span class="tech-highlight">WhiteNoise</span> | Static asset serving |
+    
+    </div>
 
 === "Environment Variables"
     
@@ -644,24 +656,36 @@ Authorization: Bearer <your-jwt-token>
 
 === "Contact Information"
     
-    - :material-account:{ style="color: #666" } **Developer**: Arafat Hossain
-    - :material-email:{ style="color: #666" } **Email**: [arafat6462@gmail.com](mailto:arafat6462@gmail.com)
-    - :material-github:{ style="color: #666" } **GitHub**: [github.com/Arafat6462](https://github.com/Arafat6462)
-    - :material-web:{ style="color: #666" } **Live API**: [arafat2.me/api/](https://arafat2.me/api/)
-    - :material-book:{ style="color: #666" } **Documentation**: This documentation site
+    <div class="premium-table contact-table">
+    
+    | Role | Contact | Link |
+    |:----:|:-------:|:-----|
+    | **👨‍💻 Developer** | <span class="contact-name">Arafat Hossain</span> | Professional developer & architect |
+    | **📧 Email** | <span class="contact-link">[arafat6462@gmail.com](mailto:arafat6462@gmail.com)</span> | Direct communication |
+    | **🐙 GitHub** | <span class="contact-link">[github.com/Arafat6462](https://github.com/Arafat6462)</span> | Source code & projects |
+    | **🌐 Live API** | <span class="contact-link">[arafat2.me/api/](https://arafat2.me/api/)</span> | Production API endpoint |
+    | **📚 Documentation** | <span class="contact-highlight">This Site</span> | Complete API reference |
+    
+    </div>
 
 === "Quick Links"
     
-    - [:material-brain:{ style="color: #666" } Try AI Models](https://arafat2.me/api/ai/models/) - No authentication required
-    - [:material-eye:{ style="color: #666" } Example Applications](https://arafat2.me/api/example-job-applications/) - Sample data
-    - [:material-shield-crown:{ style="color: #666" } API Admin](https://arafat2.me/admin/) - Admin interface
-    - [:material-api:{ style="color: #666" } API Root](https://arafat2.me/api/) - Browsable API interface
-    - [:material-book-open:{ style="color: #666" } Swagger/OpenAPI](https://arafat2.me/api/docs/) - Interactive API explorer
+    <div class="premium-table quick-links-table">
+    
+    | Service | Description | Access Level |
+    |:-------:|:------------|:-------------|
+    | **🧠 AI Models** | <span class="service-link">[Try AI Models](https://arafat2.me/api/ai/models/)</span> | <span class="access-public">🌐 No Auth Required</span> |
+    | **👁️ Example Data** | <span class="service-link">[Example Applications](https://arafat2.me/api/example-job-applications/)</span> | <span class="access-public">🌐 Sample Data</span> |
+    | **🛡️ Admin Panel** | <span class="service-link">[API Admin](https://arafat2.me/admin/)</span> | <span class="access-admin">🔐 Admin Only</span> |
+    | **🔌 API Root** | <span class="service-link">[API Root](https://arafat2.me/api/)</span> | <span class="access-browse">📖 Browsable API</span> |
+    | **📋 Swagger** | <span class="service-link">[API Docs](https://arafat2.me/api/docs/)</span> | <span class="access-interactive">⚡ Interactive</span> |
+    
+    </div>
 
 ---
 
 !!! success "Ready to Get Started?"
-    :material-rocket:{ style="color: #666" } Start by exploring the [available AI models](https://arafat2.me/api/ai/models/) or dive into the [authentication flow](#authentication) to begin building with ResuMate API.
+    :material-rocket:{ style="color: #ff9800" } Start by exploring the [available AI models](https://arafat2.me/api/ai/models/) or dive into the [authentication flow](#authentication) to begin building with ResuMate API.
 
     **Quick Start Checklist:**
     
@@ -675,4 +699,4 @@ Authorization: Bearer <your-jwt-token>
 *This API documentation is automatically generated and kept up-to-date with the latest ResuMate API version.*
 
 !!! abstract "API Status"
-    :material-check-circle:{ .color-success } **Live** • :material-update:{ style="color: #666" } Last Updated: July 2025 • :material-api:{ style="color: #666" } Version 1.0
+    :material-check-circle:{ style="color: #4caf50" } **Live** • :material-update:{ style="color: #2196f3" } Last Updated: July 2025 • :material-api:{ style="color: #9c27b0" } Version 1.0

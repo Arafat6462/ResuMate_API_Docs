@@ -372,3 +372,157 @@ a[href^="https://arafat2.me/api/"]:hover {
     padding: 3px 6px;
   }
 }
+
+/* API Documentation Specific Table Styling */
+
+/* Status Table */
+.status-table {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.02) 0%, rgba(76, 175, 80, 0.05) 100%);
+}
+
+.status-table th {
+  background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  display: inline-block;
+  text-align: center;
+  min-width: 80px;
+}
+
+.status-badge.success {
+  background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+  color: white;
+  box-shadow: 0 2px 6px rgba(76, 175, 80, 0.3);
+}
+
+.status-badge.warning {
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+  color: white;
+  box-shadow: 0 2px 6px rgba(255, 152, 0, 0.3);
+}
+
+.status-badge.error {
+  background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+  color: white;
+  box-shadow: 0 2px 6px rgba(244, 67, 54, 0.3);
+}
+
+.status-badge.info {
+  background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+  color: white;
+  box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
+}
+
+/* Backend Tech Table */
+.backend-tech-table {
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.02) 0%, rgba(33, 150, 243, 0.05) 100%);
+}
+
+.backend-tech-table th {
+  background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+}
+
+/* Contact Table */
+.contact-table {
+  background: linear-gradient(135deg, rgba(156, 39, 176, 0.02) 0%, rgba(156, 39, 176, 0.05) 100%);
+}
+
+.contact-table th {
+  background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+}
+
+.contact-name {
+  background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  display: inline-block;
+}
+
+.contact-link {
+  color: #1976d2;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  color: #0d47a1;
+  text-decoration: underline;
+}
+
+.contact-highlight {
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  display: inline-block;
+}
+
+/* Quick Links Table */
+.quick-links-table {
+  background: linear-gradient(135deg, rgba(255, 152, 0, 0.02) 0%, rgba(255, 152, 0, 0.05) 100%);
+}
+
+.quick-links-table th {
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+}
+
+.service-link {
+  color: #1976d2;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.service-link:hover {
+  color: #0d47a1;
+  text-decoration: underline;
+}
+
+.access-public {
+  background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 12px;
+  display: inline-block;
+}
+
+.access-admin {
+  background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 12px;
+  display: inline-block;
+}
+
+.access-browse {
+  background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 12px;
+  display: inline-block;
+}
+
+.access-interactive {
+  background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 12px;
+  display: inline-block;
+}
