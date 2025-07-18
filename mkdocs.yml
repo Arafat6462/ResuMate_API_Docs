@@ -77,3 +77,6 @@ extra_css:
 
 extra_javascript:
   - javascript/extra.js
+
+extra:
+  generator: false
