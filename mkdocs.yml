@@ -71,8 +71,6 @@ nav:
       - "cicd-pipeline/index.md"
   - "🚀 Live Demo":
       - "live-demo/index.md"
-  - "👨‍💻 About":
-      - "about/index.md"
 
 extra_css:
   - stylesheets/extra.css
