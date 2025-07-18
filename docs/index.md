@@ -90,7 +90,7 @@ Production-ready Django REST API with intelligent resume generation, job trackin
 </div>
 
 !!! tip "Developer Contact"
-    :material-account-circle:{ style="color: #2196f3" } **Arafat Hossain** • :material-email:{ style="color: #4caf50" } [arafat6462@gmail.com](mailto:arafat6462@gmail.com) • :material-github:{ style="color: #24292e" } [GitHub](https://github.com/Arafat6462) • :material-api:{ style="color: #ff9800" } [Live API](https://arafat2.me/api/) • :material-source-branch:{ style="color: #9c27b0" } [Source Code](https://github.com/Arafat6462/ResuMate)
+    :material-account-circle:{ style="color: #2196f3" } **Arafat Hossain** • :material-email:{ style="color: #4caf50" } [arafat6462@gmail.com](mailto:arafat6462@gmail.com) • :material-github:{ style="color: #24292e" } [GitHub](https://github.com/Arafat6462) • :material-api:{ style="color: #ff9800" } [Live API](https://arafat2.me/api) • :material-source-branch:{ style="color: #9c27b0" } [Source Code](https://github.com/Arafat6462/ResuMate)
 
 
  
