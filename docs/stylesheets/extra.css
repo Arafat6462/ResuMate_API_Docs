@@ -210,3 +210,165 @@ a[href^="https://arafat2.me/api/"]:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+/* Premium Table Styling */
+.premium-table {
+  margin: 1.5em 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(33, 150, 243, 0.1);
+}
+
+.premium-table table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.02) 0%, rgba(33, 150, 243, 0.05) 100%);
+}
+
+.premium-table th {
+  background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  padding: 16px 12px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border: none;
+}
+
+.premium-table td {
+  padding: 14px 12px;
+  text-align: center;
+  border-bottom: 1px solid rgba(33, 150, 243, 0.08);
+  vertical-align: middle;
+  transition: background-color 0.2s ease;
+}
+
+.premium-table tr:hover td {
+  background-color: rgba(33, 150, 243, 0.05);
+}
+
+.premium-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Technology Highlighting */
+.tech-highlight {
+  background: linear-gradient(135deg, #1976d2 0%, #2196f3 100%);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  display: inline-block;
+  box-shadow: 0 2px 4px rgba(25, 118, 210, 0.3);
+}
+
+.version-badge {
+  background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+  color: white;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 12px;
+  display: inline-block;
+  box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+}
+
+/* AI Table Specific Styling */
+.ai-table .provider-google {
+  background: linear-gradient(135deg, #4285f4 0%, #1a73e8 100%);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  display: inline-block;
+}
+
+.ai-table .provider-openrouter {
+  background: linear-gradient(135deg, #ff6b6b 0%, #e55252 100%);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  display: inline-block;
+}
+
+.ai-table .model-premium {
+  background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 12px;
+  display: inline-block;
+}
+
+.ai-table .model-free {
+  background: linear-gradient(135deg, #607d8b 0%, #455a64 100%);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 12px;
+  display: inline-block;
+}
+
+.ai-table .access-auth {
+  background: linear-gradient(135deg, #f57c00 0%, #ef6c00 100%);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  display: inline-block;
+  box-shadow: 0 2px 6px rgba(245, 124, 0, 0.3);
+}
+
+.ai-table .access-public {
+  background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  display: inline-block;
+  box-shadow: 0 2px 6px rgba(76, 175, 80, 0.3);
+}
+
+/* DevOps Table Specific Styling */
+.devops-table {
+  background: linear-gradient(135deg, rgba(255, 152, 0, 0.02) 0%, rgba(255, 152, 0, 0.05) 100%);
+}
+
+.devops-table th {
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+}
+
+.devops-table .tech-highlight {
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+  box-shadow: 0 2px 4px rgba(255, 152, 0, 0.3);
+}
+
+/* Responsive Design for Tables */
+@media (max-width: 768px) {
+  .premium-table {
+    font-size: 14px;
+  }
+  
+  .premium-table th,
+  .premium-table td {
+    padding: 10px 8px;
+  }
+  
+  .tech-highlight,
+  .version-badge {
+    font-size: 11px;
+    padding: 3px 6px;
+  }
+}

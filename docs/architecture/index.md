@@ -1,4 +1,4 @@
-# 🏗️ ResuMate System Architecture
+# 🏗️ ResuMate Architecture
 
 !!! abstract "Architecture Overview"
     Modern, scalable Django REST API with AI integration, containerized deployment, and enterprise-grade database design.
@@ -265,31 +265,43 @@ sequenceDiagram
 
 === "🎯 Backend Core"
     
+    <div class="premium-table">
+    
     | Component | Technology | Version | Purpose |
-    |-----------|------------|---------|---------|
-    | **Framework** | Django | 5.0.14 | Web framework & ORM |
-    | **API Layer** | Django REST Framework | Latest | RESTful API development |
-    | **Database** | PostgreSQL | 16+ | Primary data storage |
-    | **Caching** | Redis | 7+ | Session & query caching |
-    | **Authentication** | JWT | djangorestframework-simplejwt | Stateless authentication |
+    |:---------:|:----------:|:-------:|:--------|
+    | **🎯 Framework** | <span class="tech-highlight">Django</span> | <span class="version-badge">5.0.14</span> | Web framework & ORM |
+    | **🔌 API Layer** | <span class="tech-highlight">Django REST Framework</span> | <span class="version-badge">Latest</span> | RESTful API development |
+    | **🗄️ Database** | <span class="tech-highlight">PostgreSQL</span> | <span class="version-badge">16+</span> | Primary data storage |
+    | **⚡ Caching** | <span class="tech-highlight">Redis</span> | <span class="version-badge">7+</span> | Session & query caching |
+    | **🔐 Authentication** | <span class="tech-highlight">JWT</span> | <span class="version-badge">simplejwt</span> | Stateless authentication |
+    
+    </div>
 
 === "🤖 AI Integration"
     
+    <div class="premium-table ai-table">
+    
     | Service | Provider | Model | Access Level |
-    |---------|----------|-------|--------------|
-    | **Google Gemini** | Google AI | gemini-2.0-flash-exp | 🔐 Authenticated (5/day) |
-    | **Deepseek** | OpenRouter | deepseek/deepseek-r1 | 🌐 Public (Unlimited) |
-    | **Cypher** | OpenRouter | teknium/openhermes-2.5 | 🌐 Public (Unlimited) |
+    |:-------:|:--------:|:-----:|:-------------|
+    | **🧠 Google Gemini** | <span class="provider-google">Google AI</span> | <span class="model-premium">gemini-2.0-flash-exp</span> | <span class="access-auth">🔐 Authenticated (5/day)</span> |
+    | **🚀 Deepseek** | <span class="provider-openrouter">OpenRouter</span> | <span class="model-free">deepseek/deepseek-r1</span> | <span class="access-public">🌐 Public (Unlimited)</span> |
+    | **⚡ Cypher** | <span class="provider-openrouter">OpenRouter</span> | <span class="model-free">teknium/openhermes-2.5</span> | <span class="access-public">🌐 Public (Unlimited)</span> |
+    
+    </div>
 
 === "🐳 DevOps & Infrastructure"
     
+    <div class="premium-table devops-table">
+    
     | Component | Technology | Purpose |
-    |-----------|------------|---------|
-    | **Containerization** | Docker + Compose | Development & deployment |
-    | **CI/CD** | GitHub Actions | Automated testing & deployment |
-    | **Web Server** | Gunicorn + Nginx | Production WSGI server |
-    | **Monitoring** | Django Logging | Error tracking & performance |
-    | **Static Files** | WhiteNoise | Static asset serving |
+    |:---------:|:----------:|:--------|
+    | **🐳 Containerization** | <span class="tech-highlight">Docker + Compose</span> | Development & deployment |
+    | **🔄 CI/CD** | <span class="tech-highlight">GitHub Actions</span> | Automated testing & deployment |
+    | **🌐 Web Server** | <span class="tech-highlight">Gunicorn + Nginx</span> | Production WSGI server |
+    | **📊 Monitoring** | <span class="tech-highlight">Django Logging</span> | Error tracking & performance |
+    | **📁 Static Files** | <span class="tech-highlight">WhiteNoise</span> | Static asset serving |
+    
+    </div>
 
 ---
 
@@ -599,4 +611,4 @@ graph TB
 
 ---
 
-*Architecture documentation automatically updated with latest system design • Last Updated: July 2025*
+*Architecture documentation • Last Updated: July 2025*
