@@ -1,0 +1,81 @@
+site_name: ResuMate API - Premium Documentation Hub
+site_description: Professional showcase for ResuMate Django REST API project
+site_author: Arafat
+site_url: https://resumate-docs.example.com
+
+repo_name: ResuMate API
+repo_url: https://github.com/arafat/resumate-api
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+
+plugins:
+  - search
+  - mermaid2
+  - awesome-pages
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - md_in_html
+
+nav:
+  - "🏠 Home": index.md
+  - "🔌 API Docs":
+      - "api-docs/index.md"
+  - "🏗️ Architecture":
+      - "architecture/index.md"
+  - "⚙️ CI/CD Pipeline":
+      - "cicd-pipeline/index.md"
+  - "🚀 Live Demo":
+      - "live-demo/index.md"
+  - "👨‍💻 About":
+      - "about/index.md"
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascript/extra.js

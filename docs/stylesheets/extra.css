@@ -1,0 +1,9 @@
+/* Custom CSS for ResuMate Documentation */
+
+:root {
+  --primary-color: #2196f3;
+  --accent-color: #ff9800;
+  --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Premium styling will be added here */

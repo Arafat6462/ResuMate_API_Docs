@@ -1,0 +1,11 @@
+
+services:
+  mkdocs:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/docs
+    environment:
+      - MKDOCS_DEV_ADDR=0.0.0.0:8000
+    command: mkdocs serve --dev-addr=0.0.0.0:8000

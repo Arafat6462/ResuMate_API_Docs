@@ -7,10 +7,10 @@ Premium MkDocs documentation hub for the ResuMate Django REST API project.
 ### Build and Run
 ```bash
 # Build the container
-docker-compose build
+docker compose build
 
 # Start the documentation server
-docker-compose up
+docker compose up
 
 # Access at http://localhost:8000
 ```
@@ -27,16 +27,14 @@ mkdocs serve
 mkdocs build
 ```
 
-## 📋 8-Part Premium Showcase Structure
+## 📋 6-Part Premium Showcase Structure
 
 1. **🏠 Hero Landing Page** - Eye-catching first impression
-2. **🔌 Interactive API Explorer** - Complete REST API showcase
+2. **🔌 API Explorer** - Complete REST API showcase
 3. **🏗️ System Architecture** - Technical architecture visualization
-4. **🗄️ Database Schema Explorer** - Data model showcase
-5. **⚙️ CI/CD Pipeline** - DevOps practices demonstration
-6. **🚀 Live Demo & Deployment** - Working application showcase
-7. **🎯 Features & Capabilities** - Unique features and AI integration
-8. **👨‍💻 Developer Story** - Personal touch and project background
+4. **⚙️ CI/CD Pipeline** - DevOps practices demonstration
+5. **🚀 Live Demo** - Working application showcase
+6. **👨‍💻 About** - Personal touch and project background
 
 ## 🛠️ Tech Stack
 
@@ -54,17 +52,15 @@ ResuMate-Docs/
 │   ├── hero-landing/         # Part 1: Hero page
 │   ├── api-explorer/         # Part 2: API docs
 │   ├── architecture/         # Part 3: System architecture
-│   ├── database-schema/      # Part 4: Database design
-│   ├── cicd-pipeline/        # Part 5: DevOps pipeline
-│   ├── live-demo/           # Part 6: Live demonstration
-│   ├── features/            # Part 7: Feature showcase
-│   ├── developer-story/     # Part 8: About & background
-│   ├── stylesheets/         # Custom CSS
-│   └── javascript/          # Custom JS
-├── Dockerfile               # Container configuration
-├── docker-compose.yml       # Docker compose setup
-├── mkdocs.yml              # MkDocs configuration
-└── requirements.txt        # Python dependencies
+│   ├── cicd-pipeline/        # Part 4: DevOps pipeline
+│   ├── live-demo/            # Part 5: Live demonstration
+│   ├── developer-story/      # Part 6: About & background
+│   ├── stylesheets/          # Custom CSS
+│   └── javascript/           # Custom JS
+├── Dockerfile                # Container configuration
+├── docker-compose.yml        # Docker compose setup
+├── mkdocs.yml                # MkDocs configuration
+└── requirements.txt          # Python dependencies
 ```
 
 ## 🎯 Purpose
@@ -73,4 +69,4 @@ This documentation hub serves as a premium showcase for the ResuMate Django REST
 
 ---
 
-*Built with ❤️ for showcasing modern API development practices*
+*Built with ❤️ by Arafat for showcasing modern API development practices*
