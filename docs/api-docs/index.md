@@ -364,8 +364,6 @@ Authorization: Bearer <your-jwt-token>
 
 ### Standard HTTP Status Codes
 
-<div class="premium-table status-table">
-
 | Status Code | Description | Status |
 |:-----------:|:------------|:-------|
 | :material-check-circle:{ style="color: #4caf50" } **200** | OK - Request successful | <span class="status-badge success">✅ Success</span> |
@@ -375,8 +373,7 @@ Authorization: Bearer <your-jwt-token>
 | :material-cancel:{ style="color: #f44336" } **403** | Forbidden - Insufficient permissions | <span class="status-badge error">❌ Error</span> |
 | :material-help-circle:{ style="color: #2196f3" } **404** | Not Found - Resource not found | <span class="status-badge info">ℹ️ Info</span> |
 | :material-server-network:{ style="color: #f44336" } **503** | Service Unavailable - AI service error | <span class="status-badge error">❌ Error</span> |
-
-</div>
+{: .premium-table .status-table }
 
 ### Error Response Format
 ```json
@@ -593,8 +590,6 @@ Authorization: Bearer <your-jwt-token>
 
 === "Backend Technologies"
     
-    <div class="premium-table backend-tech-table">
-    
     | Technology | Component | Purpose |
     |:----------:|:---------:|:--------|
     | **🐍 Backend** | <span class="tech-highlight">Django 5.0.14</span> | Web framework & REST API |
@@ -604,8 +599,7 @@ Authorization: Bearer <your-jwt-token>
     | **🔀 AI Router** | <span class="tech-highlight">OpenAI SDK</span> | Multiple AI model support |
     | **🚀 Deployment** | <span class="tech-highlight">Gunicorn</span> | Production WSGI server |
     | **📁 Static Files** | <span class="tech-highlight">WhiteNoise</span> | Static asset serving |
-    
-    </div>
+    {: .premium-table .backend-tech-table }
 
 === "Environment Variables"
     
@@ -656,8 +650,6 @@ Authorization: Bearer <your-jwt-token>
 
 === "Contact Information"
     
-    <div class="premium-table contact-table">
-    
     | Role | Contact | Link |
     |:----:|:-------:|:-----|
     | **👨‍💻 Developer** | <span class="contact-name">Arafat Hossain</span> | Professional developer & architect |
@@ -665,12 +657,9 @@ Authorization: Bearer <your-jwt-token>
     | **🐙 GitHub** | <span class="contact-link">[github.com/Arafat6462](https://github.com/Arafat6462)</span> | Source code & projects |
     | **🌐 Live API** | <span class="contact-link">[arafat2.me/api/](https://arafat2.me/api/)</span> | Production API endpoint |
     | **📚 Documentation** | <span class="contact-highlight">This Site</span> | Complete API reference |
-    
-    </div>
+    {: .premium-table .contact-table }
 
 === "Quick Links"
-    
-    <div class="premium-table quick-links-table">
     
     | Service | Description | Access Level |
     |:-------:|:------------|:-------------|
@@ -679,8 +668,7 @@ Authorization: Bearer <your-jwt-token>
     | **🛡️ Admin Panel** | <span class="service-link">[API Admin](https://arafat2.me/admin/)</span> | <span class="access-admin">🔐 Admin Only</span> |
     | **🔌 API Root** | <span class="service-link">[API Root](https://arafat2.me/api/)</span> | <span class="access-browse">📖 Browsable API</span> |
     | **📋 Swagger** | <span class="service-link">[API Docs](https://arafat2.me/api/docs/)</span> | <span class="access-interactive">⚡ Interactive</span> |
-    
-    </div>
+    {: .premium-table .quick-links-table }
 
 ---
 
