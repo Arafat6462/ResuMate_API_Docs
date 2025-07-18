@@ -129,22 +129,20 @@
   background: linear-gradient(90deg, rgba(33, 150, 243, 0.05) 0%, rgba(33, 150, 243, 0.02) 100%);
 }
 
-/* Copy-friendly code blocks */
+/* Code block copy button improvements */
 .highlight pre {
   position: relative;
 }
 
-.highlight pre:hover::after {
-  content: "📋 Click to copy";
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  opacity: 0.8;
+/* Fix copy button tooltip positioning to avoid overlap */
+.md-clipboard__message {
+  top: -40px !important; /* Move tooltip higher above the button */
+  right: 0px !important;
+}
+
+/* Ensure copy button is easily accessible */
+.md-clipboard {
+  z-index: 10 !important;
 }
 
 /* Remove gradient from headers - use simple dark color */
