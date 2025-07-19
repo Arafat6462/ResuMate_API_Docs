@@ -684,7 +684,5 @@ Authorization: Bearer <your-jwt-token>
 
 ---
 
-*This API documentation is automatically generated and kept up-to-date with the latest ResuMate API version.*
-
 !!! abstract "API Status"
     :material-check-circle:{ style="color: #4caf50" } **Live** • :material-update:{ style="color: #2196f3" } Last Updated: July 2025 • :material-api:{ style="color: #9c27b0" } Version 1.0

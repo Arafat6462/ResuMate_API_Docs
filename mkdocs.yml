@@ -4,7 +4,7 @@ site_author: Arafat
 site_url: https://resumate-docs.example.com
 
 repo_name: ResuMate API
-repo_url: https://github.com/arafat/resumate-api
+repo_url: https://github.com/arafat6462/resumate
 
 theme:
   name: material
