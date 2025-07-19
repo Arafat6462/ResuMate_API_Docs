@@ -72,29 +72,30 @@
   margin-bottom: 2rem !important;
 }
 
-/* Section Navigation Cards - Smaller & More Compact */
+/* Premium Section Navigation Cards */
 .section-nav-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
-  max-width: 1000px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .section-nav-card {
-  background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
-  padding: 1.5rem 1rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-  border: 2px solid rgba(0, 0, 0, 0.05);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 2px solid rgba(255, 255, 255, 0.8);
   text-align: center;
   text-decoration: none !important;
   color: inherit !important;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 
 .section-nav-card::before {
@@ -103,46 +104,73 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent 0%, rgba(33, 150, 243, 0.3) 50%, transparent 100%);
-  transition: all 0.3s ease;
+  height: 5px;
+  background: linear-gradient(90deg, transparent 0%, rgba(33, 150, 243, 0.6) 50%, transparent 100%);
+  transition: all 0.4s ease;
+}
+
+.section-nav-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.02) 0%, rgba(156, 39, 176, 0.02) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
 }
 
 .section-nav-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
   text-decoration: none !important;
+  border-color: rgba(33, 150, 243, 0.3);
 }
 
 .section-nav-card:hover::before {
   background: linear-gradient(90deg, transparent 0%, rgba(33, 150, 243, 1) 50%, transparent 100%);
-  height: 4px;
+  height: 6px;
+}
+
+.section-nav-card:hover::after {
+  opacity: 1;
 }
 
 .section-nav-card .nav-icon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 3rem;
+  margin-bottom: 1.2rem;
   line-height: 1;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  position: relative;
+  z-index: 1;
 }
 
 .section-nav-card:hover .nav-icon {
-  transform: scale(1.05);
+  transform: scale(1.15) rotate(5deg);
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
 }
 
 .section-nav-card .nav-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin: 0.5rem 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0.8rem 0;
   color: #1a1a1a;
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 1;
 }
 
 .section-nav-card .nav-description {
-  font-size: 0.85rem;
-  color: #666;
+  font-size: 0.95rem;
+  color: #555;
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.5;
   font-weight: 400;
+  position: relative;
+  z-index: 1;
 }
 
 /* Features Grid - 3x2 Layout */
@@ -322,41 +350,77 @@
   text-decoration: underline;
 }
 
-/* Individual hover effects for navigation cards */
+/* Premium Individual Card Hover Effects */
 .section-nav-card.api-docs:hover {
   border-color: #2196f3;
-  background: linear-gradient(135deg, rgba(33, 150, 243, 0.02) 0%, rgba(33, 150, 243, 0.06) 100%);
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.08) 0%, rgba(33, 150, 243, 0.12) 100%);
+  box-shadow: 0 20px 60px rgba(33, 150, 243, 0.25);
 }
 
 .section-nav-card.api-docs:hover::before {
   background: linear-gradient(90deg, transparent 0%, #2196f3 50%, transparent 100%);
 }
 
+.section-nav-card.api-docs:hover::after {
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(33, 150, 243, 0.05) 100%);
+}
+
+.section-nav-card.api-docs .nav-icon {
+  color: #2196f3;
+}
+
 .section-nav-card.architecture:hover {
   border-color: #ff9800;
-  background: linear-gradient(135deg, rgba(255, 152, 0, 0.02) 0%, rgba(255, 152, 0, 0.06) 100%);
+  background: linear-gradient(135deg, rgba(255, 152, 0, 0.08) 0%, rgba(255, 152, 0, 0.12) 100%);
+  box-shadow: 0 20px 60px rgba(255, 152, 0, 0.25);
 }
 
 .section-nav-card.architecture:hover::before {
   background: linear-gradient(90deg, transparent 0%, #ff9800 50%, transparent 100%);
 }
 
+.section-nav-card.architecture:hover::after {
+  background: linear-gradient(135deg, rgba(255, 152, 0, 0.1) 0%, rgba(255, 152, 0, 0.05) 100%);
+}
+
+.section-nav-card.architecture .nav-icon {
+  color: #ff9800;
+}
+
 .section-nav-card.cicd:hover {
   border-color: #4caf50;
-  background: linear-gradient(135deg, rgba(76, 175, 80, 0.02) 0%, rgba(76, 175, 80, 0.06) 100%);
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.08) 0%, rgba(76, 175, 80, 0.12) 100%);
+  box-shadow: 0 20px 60px rgba(76, 175, 80, 0.25);
 }
 
 .section-nav-card.cicd:hover::before {
   background: linear-gradient(90deg, transparent 0%, #4caf50 50%, transparent 100%);
 }
 
+.section-nav-card.cicd:hover::after {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(76, 175, 80, 0.05) 100%);
+}
+
+.section-nav-card.cicd .nav-icon {
+  color: #4caf50;
+}
+
 .section-nav-card.demo:hover {
   border-color: #9c27b0;
-  background: linear-gradient(135deg, rgba(156, 39, 176, 0.02) 0%, rgba(156, 39, 176, 0.06) 100%);
+  background: linear-gradient(135deg, rgba(156, 39, 176, 0.08) 0%, rgba(156, 39, 176, 0.12) 100%);
+  box-shadow: 0 20px 60px rgba(156, 39, 176, 0.25);
 }
 
 .section-nav-card.demo:hover::before {
   background: linear-gradient(90deg, transparent 0%, #9c27b0 50%, transparent 100%);
+}
+
+.section-nav-card.demo:hover::after {
+  background: linear-gradient(135deg, rgba(156, 39, 176, 0.1) 0%, rgba(156, 39, 176, 0.05) 100%);
+}
+
+.section-nav-card.demo .nav-icon {
+  color: #9c27b0;
 }
 
 /* CTA Section */
@@ -443,7 +507,23 @@
   
   .section-nav-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    gap: 1.5rem;
+  }
+  
+  .section-nav-card {
+    padding: 1.5rem 1rem;
+  }
+  
+  .section-nav-card .nav-icon {
+    font-size: 2.5rem;
+  }
+  
+  .section-nav-card .nav-title {
+    font-size: 1.1rem;
+  }
+  
+  .section-nav-card .nav-description {
+    font-size: 0.85rem;
   }
   
   .cta-section {
@@ -466,120 +546,17 @@
   .section-nav-grid {
     grid-template-columns: 1fr;
   }
+  
+  .section-nav-card {
+    padding: 1.2rem 0.8rem;
+  }
+  
+  .section-nav-card .nav-icon {
+    font-size: 2.2rem;
+  }
 }
 
-/* Section Navigation Cards */
-.section-nav-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin: 4rem 0;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-}
 
-.section-nav-card {
-  background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
-  padding: 2.5rem 2rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  transition: all 0.4s ease;
-  border: 2px solid rgba(0, 0, 0, 0.05);
-  text-align: center;
-  text-decoration: none !important;
-  color: inherit !important;
-  position: relative;
-  overflow: hidden;
-}
-
-.section-nav-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, transparent 0%, rgba(33, 150, 243, 0.3) 50%, transparent 100%);
-  transition: all 0.4s ease;
-}
-
-.section-nav-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
-  text-decoration: none !important;
-}
-
-.section-nav-card:hover::before {
-  background: linear-gradient(90deg, transparent 0%, rgba(33, 150, 243, 1) 50%, transparent 100%);
-  height: 6px;
-}
-
-.section-nav-card .nav-icon {
-  font-size: 3.5rem;
-  margin-bottom: 1.5rem;
-  line-height: 1;
-  filter: grayscale(0.3);
-  transition: all 0.3s ease;
-}
-
-.section-nav-card:hover .nav-icon {
-  filter: grayscale(0);
-  transform: scale(1.1);
-}
-
-.section-nav-card .nav-title {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin: 1rem 0 0.8rem 0;
-  color: #1a1a1a;
-  letter-spacing: -0.02em;
-}
-
-.section-nav-card .nav-description {
-  font-size: 1rem;
-  color: #666;
-  margin: 0;
-  line-height: 1.6;
-  font-weight: 400;
-}
-
-/* Individual card hover effects */
-.section-nav-card.api-docs:hover {
-  border-color: #2196f3;
-  background: linear-gradient(135deg, rgba(33, 150, 243, 0.02) 0%, rgba(33, 150, 243, 0.08) 100%);
-}
-
-.section-nav-card.api-docs:hover::before {
-  background: linear-gradient(90deg, transparent 0%, #2196f3 50%, transparent 100%);
-}
-
-.section-nav-card.architecture:hover {
-  border-color: #ff9800;
-  background: linear-gradient(135deg, rgba(255, 152, 0, 0.02) 0%, rgba(255, 152, 0, 0.08) 100%);
-}
-
-.section-nav-card.architecture:hover::before {
-  background: linear-gradient(90deg, transparent 0%, #ff9800 50%, transparent 100%);
-}
-
-.section-nav-card.cicd:hover {
-  border-color: #4caf50;
-  background: linear-gradient(135deg, rgba(76, 175, 80, 0.02) 0%, rgba(76, 175, 80, 0.08) 100%);
-}
-
-.section-nav-card.cicd:hover::before {
-  background: linear-gradient(90deg, transparent 0%, #4caf50 50%, transparent 100%);
-}
-
-.section-nav-card.demo:hover {
-  border-color: #9c27b0;
-  background: linear-gradient(135deg, rgba(156, 39, 176, 0.02) 0%, rgba(156, 39, 176, 0.08) 100%);
-}
-
-.section-nav-card.demo:hover::before {
-  background: linear-gradient(90deg, transparent 0%, #9c27b0 50%, transparent 100%);
-}
 
 /* ====== EXISTING STYLES ====== */
 
