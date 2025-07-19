@@ -11,9 +11,10 @@
 
 ## 🎯 Overview
 
-ResuMate API provides **user management**, **resume CRUD operations**, **AI-powered resume generation** (Google Gemini, OpenRouter), **job application tracking**, and **PostgreSQL persistence** with both authenticated and anonymous access.
+ResuMate API provides user management, resume CRUD operations, AI-powered resume generation (Google Gemini, OpenRouter), job application tracking and PostgreSQL persistence with both authenticated and anonymous access.
 
-**Key Features:** :material-shield-check:{ style="color: #4caf50" } JWT Authentication • :material-file-document-multiple:{ style="color: #2196f3" } Full Resume Management • :material-brain:{ style="color: #9c27b0" } Multiple AI Models • :material-briefcase:{ style="color: #ff9800" } Job Tracking • :material-eye:{ style="color: #607d8b" } Example Data
+!!! tip "Key Features"
+    :material-shield-check:{ style="color: #4caf50" } **JWT Authentication** • :material-file-document-multiple:{ style="color: #2196f3" } **Full Resume Management** • :material-brain:{ style="color: #9c27b0" } **Multiple AI Models** • :material-briefcase:{ style="color: #ff9800" } **Job Tracking** • :material-eye:{ style="color: #607d8b" } **Example Data**
 
 !!! tip "Live Testing"
     Try the API instantly: [List AI Models](https://arafat2.me/api/ai/models/) • [Example Applications](https://arafat2.me/api/example-job-applications/) • [API Root](https://arafat2.me/api/)
