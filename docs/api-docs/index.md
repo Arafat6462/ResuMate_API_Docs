@@ -1,47 +1,43 @@
 # 🔗 ResuMate API Documentation
 
-!!! info "API Configuration"
-    **Base URL**
+!!! success "Base URL:"
     ```
     https://arafat2.me/api/
-    ```
-    **Content Type:** `application/json` | **Authentication:** JWT Tokens
-
+    ```  
 ---
 
 ## 🎯 Overview
 
-ResuMate API provides user management, resume CRUD operations, AI-powered resume generation (Google Gemini, OpenRouter), job application tracking and PostgreSQL persistence with both authenticated and anonymous access.
+!!! abstract "About ResuMate API"
+    A comprehensive REST API providing user management, resume CRUD operations, AI-powered resume generation with multiple models (Google Gemini, OpenRouter), job application tracking, and PostgreSQL persistence with both authenticated and anonymous access.
 
 !!! tip "Key Features"
     :material-shield-check:{ style="color: #4caf50" } **JWT Authentication** • :material-file-document-multiple:{ style="color: #2196f3" } **Full Resume Management** • :material-brain:{ style="color: #9c27b0" } **Multiple AI Models** • :material-briefcase:{ style="color: #ff9800" } **Job Tracking** • :material-eye:{ style="color: #607d8b" } **Example Data**
 
-!!! tip "Live Testing"
-    Try the API instantly: [List AI Models](https://arafat2.me/api/ai/models/) • [Example Applications](https://arafat2.me/api/example-job-applications/) • [API Root](https://arafat2.me/api/)
-
+!!! example "Quick Start - Try Now!"
+    :material-lock-open:{ style="color: #eb7f12ff" } **No auth required:** [:material-brain:{ style="color: #ffff70ff" } AI Models](https://arafat2.me/api/ai/models/) • [:material-eye:{ style="color: #56f80aff" } Example Applications](https://arafat2.me/api/example-job-applications/) • [:material-api:{ style="color: #efe9a3ff" } API Root](https://arafat2.me/api/)
 ---
 
 ## 🔐 Authentication
 
 !!! warning "Authentication Required"
-    Most endpoints require JWT authentication. Anonymous access is limited to certain AI models and example data.
+    Most endpoints require JWT authentication. Anonymous access is limited to specific AI models and example data endpoints.
 
-### JWT Token Authentication
+!!! info "JWT Token Authentication"
+    The API uses JSON Web Tokens (JWT) for secure authentication. Include your token in the Authorization header:
+    
+    ```http
+    Authorization: Bearer <your-jwt-token>
+    ```
 
-The API uses JSON Web Tokens (JWT) for authentication. Include the token in the Authorization header:
+### 🔑 Authentication Endpoints
 
-```http
-Authorization: Bearer <your-jwt-token>
-```
-
-### Authentication Endpoints
-
-!!! example ""
-    === ":material-account-plus: **Register**"
+!!! example "Authentication Flow"
+    === ":material-account-plus: Register"
         
         !!! success "POST `/api/auth/register/`"
-        
-        Create a new user account.
+            **Description:** Create a new user account  
+            **Authentication:** :material-shield-off:{ style="color: #9e9e9e" } Not Required
         
         **Request Body:**
         ```json
@@ -53,20 +49,20 @@ Authorization: Bearer <your-jwt-token>
         }
         ```
         
-        **Response (201 Created):**
-        ```json
-        {
-          "id": 1,
-          "username": "john_doe",
-          "email": "john@example.com"
-        }
-        ```
+        !!! check "Response (201 Created)"
+            ```json
+            {
+              "id": 1,
+              "username": "john_doe",
+              "email": "john@example.com"
+            }
+            ```
 
-    === ":material-login: **Login**"
+    === ":material-login: Login"
         
         !!! info "POST `/api/auth/token/`"
-        
-        Obtain access and refresh tokens.
+            **Description:** Obtain access and refresh tokens  
+            **Authentication:** :material-shield-off:{ style="color: #9e9e9e" } Not Required
         
         **Request Body:**
         ```json
@@ -76,19 +72,19 @@ Authorization: Bearer <your-jwt-token>
         }
         ```
         
-        **Response (200 OK):**
-        ```json
-        {
-          "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
-          "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
-        }
-        ```
+        !!! check "Response (200 OK)"
+            ```json
+            {
+              "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+              "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
+            }
+            ```
 
-    === ":material-refresh: **Refresh**"
+    === ":material-refresh: Refresh Token"
         
         !!! tip "POST `/api/auth/token/refresh/`"
-        
-        Refresh your access token.
+            **Description:** Refresh your access token  
+            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Refresh Token Required
         
         **Request Body:**
         ```json
@@ -96,6 +92,13 @@ Authorization: Bearer <your-jwt-token>
           "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
         }
         ```
+        
+        !!! check "Response (200 OK)"
+            ```json
+            {
+              "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
+            }
+            ```
 
 ---
 
@@ -104,586 +107,869 @@ Authorization: Bearer <your-jwt-token>
 ### 📄 Resume Management
 
 !!! abstract "Resume Operations"
-    Manage your resume documents with full CRUD operations.
+    Complete CRUD operations for managing resume documents with user-specific access control.
 
-!!! example ""
-    === ":material-format-list-bulleted: **List Resumes**"
+!!! example "Resume Endpoints"
+    === ":material-format-list-bulleted: List Resumes"
         
         !!! info "GET `/api/resumes/`"
             **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required  
-            **Description:** Retrieve all resumes for the authenticated user
+            **Description:** Retrieve all resumes for authenticated user
         
-        **Sample Request:**
-        ```bash
-        curl -H "Authorization: Bearer <token>" https://arafat2.me/api/resumes/
-        ```
+        !!! example "Sample Request"
+            ```bash
+            curl -H "Authorization: Bearer <token>" \
+                 https://arafat2.me/api/resumes/
+            ```
         
-        **Response (200 OK):**
-        ```json
-        [
-          {
-            "id": 1,
-            "user": "john_doe",
-            "title": "Software Engineer Resume",
-            "content": "# John Doe\n\n## Experience\n...",
-            "created_at": "2023-01-15T10:30:00Z",
-            "updated_at": "2023-01-16T14:20:00Z"
-          }
-        ]
-        ```
+        !!! check "Response (200 OK)"
+            ```json
+            [
+              {
+                "id": 1,
+                "user": "john_doe",
+                "title": "Software Engineer Resume",
+                "content": "# John Doe\n\n## Experience\n...",
+                "created_at": "2023-01-15T10:30:00Z",
+                "updated_at": "2023-01-16T14:20:00Z"
+              }
+            ]
+            ```
 
-    === ":material-plus: **Create Resume**"
+    === ":material-plus: Create Resume"
         
         !!! success "POST `/api/resumes/`"
-            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required
+            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required  
+            **Description:** Create a new resume document
         
-        **Request Body:**
-        ```json
-        {
-          "title": "Software Engineer Resume",
-          "content": "# John Doe\n\n## Experience\n..."
-        }
-        ```
+        !!! example "Request Body"
+            ```json
+            {
+              "title": "Software Engineer Resume",
+              "content": "# John Doe\n\n## Experience\n..."
+            }
+            ```
+        
+        !!! check "Response (201 Created)"
+            ```json
+            {
+              "id": 2,
+              "user": "john_doe",
+              "title": "Software Engineer Resume",
+              "content": "# John Doe\n\n## Experience\n...",
+              "created_at": "2023-01-15T10:30:00Z",
+              "updated_at": "2023-01-15T10:30:00Z"
+            }
+            ```
 
-    === ":material-file-document: **Get Resume**"
+    === ":material-file-document: Get Resume"
         
         !!! info "GET `/api/resumes/{id}/`"
-            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required
+            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required  
+            **Description:** Retrieve a specific resume by ID
 
-    === ":material-pencil: **Update Resume**"
+    === ":material-pencil: Update Resume"
         
         !!! warning "PUT/PATCH `/api/resumes/{id}/`"
-            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required
+            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required  
+            **Description:** Update an existing resume
 
-    === ":material-delete: **Delete Resume**"
+    === ":material-delete: Delete Resume"
         
         !!! danger "DELETE `/api/resumes/{id}/`"
-            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required
+            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required  
+            **Description:** Delete a resume permanently
 
 ### 🤖 AI-Powered Resume Generation
 
 !!! tip "AI Features"
-    Generate professional resumes using advanced AI models with different capabilities and access levels.
+    Generate professional resumes using advanced AI models with varying capabilities and access levels.
 
-!!! example ""
-    === ":material-brain: **List AI Models**"
+!!! example "AI Endpoints"
+    === ":material-brain: List AI Models"
         
         !!! success "GET `/api/ai/models/`"
-            **Authentication:** :material-shield-off:{ style="color: #9e9e9e" } Not Required
+            **Authentication:** :material-shield-off:{ style="color: #9e9e9e" } Not Required  
+            **Description:** Get available AI models and their configurations
         
-        **Sample Request:**
-        ```bash
-        curl https://arafat2.me/api/ai/models/
-        ```
+        !!! example "Sample Request"
+            ```bash
+            curl https://arafat2.me/api/ai/models/
+            ```
         
-        **Response (200 OK):**
-        ```json
-        [
-          {
-            "display_name": "Deepseek",
-            "description": "Advanced AI model for professional resume generation",
-            "response_time_info": "Fast",
-            "login_required": false
-          },
-          {
-            "display_name": "GPT-4",
-            "description": "Premium AI model with superior writing quality",
-            "response_time_info": "5-10 seconds",
-            "login_required": true
-          }
-        ]
-        ```
+        !!! check "Response (200 OK)"
+            ```json
+            [
+              {
+                "display_name": "Deepseek",
+                "description": "Advanced AI model for professional resume generation",
+                "response_time_info": "Fast",
+                "login_required": false
+              },
+              {
+                "display_name": "GPT-4",
+                "description": "Premium AI model with superior writing quality",
+                "response_time_info": "5-10 seconds",
+                "login_required": true
+              }
+            ]
+            ```
 
-    === ":material-auto-fix: **Generate Resume**"
+    === ":material-auto-fix: Generate Resume"
         
         !!! info "POST `/api/ai/generate/`"
-            **Authentication:** :material-shield-half-full:{ style="color: #ff9800" } Optional (depends on selected model)
+            **Authentication:** :material-shield-half-full:{ style="color: #ff9800" } Model Dependent  
+            **Description:** Generate AI-powered resume content
         
-        **Request Body:**
-        ```json
-        {
-          "model": "Deepseek",
-          "user_input": "Software engineer with 5 years experience in Python, Django, React. Worked at tech startups building scalable web applications. Expert in cloud deployment and database optimization.",
-          "title": "Senior Software Engineer Resume"
-        }
-        ```
+        !!! example "Request Body"
+            ```json
+            {
+              "model": "Deepseek",
+              "user_input": "Software engineer with 5 years experience in Python, Django, React. Worked at tech startups building scalable web applications. Expert in cloud deployment and database optimization.",
+              "title": "Senior Software Engineer Resume"
+            }
+            ```
         
-        **Response (201 Created):**
-        ```json
-        {
-          "resume_id": 15,
-          "content": "# John Doe\n\n## Professional Summary\nExperienced Software Engineer with 5+ years of expertise in Python, Django, and React...\n\n## Technical Skills\n- **Backend:** Python, Django, RESTful APIs\n- **Frontend:** React, JavaScript, HTML5, CSS3\n..."
-        }
-        ```
+        !!! check "Response (201 Created)"
+            ```json
+            {
+              "resume_id": 15,
+              "content": "# John Doe\n\n## Professional Summary\nExperienced Software Engineer with 5+ years of expertise in Python, Django, and React...\n\n## Technical Skills\n- **Backend:** Python, Django, RESTful APIs\n- **Frontend:** React, JavaScript, HTML5, CSS3\n..."
+            }
+            ```
 
 ### 📊 Job Application Tracking
 
 !!! note "Job Management"
-    Track your job applications with comprehensive status management and soft delete functionality.
+    Comprehensive job application tracking with status management and soft delete functionality.
 
-!!! example ""
-    === ":material-clipboard-list: **List Applications**"
+!!! example "Job Application Endpoints"
+    === ":material-clipboard-list: List Applications"
         
         !!! info "GET `/api/job-applications/`"
-            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required
+            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required  
+            **Description:** Retrieve all job applications for authenticated user
         
-        **Sample Request:**
-        ```bash
-        curl -H "Authorization: Bearer <token>" https://arafat2.me/api/job-applications/
-        ```
+        !!! example "Sample Request"
+            ```bash
+            curl -H "Authorization: Bearer <token>" \
+                 https://arafat2.me/api/job-applications/
+            ```
         
-        **Response (200 OK):**
-        ```json
-        [
-          {
-            "id": 1,
-            "user": 1,
-            "job_title": "Senior Software Engineer",
-            "company_name": "TechCorp Inc.",
-            "original_job_description": "We are looking for a senior software engineer...",
-            "resume_used": 1,
-            "date_applied": "2023-01-15",
-            "status": "Interviewing",
-            "notes": "Had initial phone screening, technical interview scheduled for next week",
-            "is_deleted": false,
-            "is_example": false,
-            "created_at": "2023-01-15T10:30:00Z",
-            "updated_at": "2023-01-20T16:45:00Z"
-          }
-        ]
-        ```
+        !!! check "Response (200 OK)"
+            ```json
+            [
+              {
+                "id": 1,
+                "user": 1,
+                "job_title": "Senior Software Engineer",
+                "company_name": "TechCorp Inc.",
+                "original_job_description": "We are looking for a senior software engineer...",
+                "resume_used": 1,
+                "date_applied": "2023-01-15",
+                "status": "Interviewing",
+                "notes": "Had initial phone screening, technical interview scheduled for next week",
+                "is_deleted": false,
+                "is_example": false,
+                "created_at": "2023-01-15T10:30:00Z",
+                "updated_at": "2023-01-20T16:45:00Z"
+              }
+            ]
+            ```
 
-    === ":material-plus: **Create Application**"
+    === ":material-plus: Create Application"
         
         !!! success "POST `/api/job-applications/`"
-            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required
+            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required  
+            **Description:** Create a new job application record
         
-        **Request Body:**
-        ```json
-        {
-          "job_title": "Senior Software Engineer",
-          "company_name": "TechCorp Inc.",
-          "original_job_description": "We are looking for a senior software engineer...",
-          "resume_used": 1,
-          "date_applied": "2023-01-15",
-          "status": "Applied",
-          "notes": "Applied through company website"
-        }
-        ```
+        !!! example "Request Body"
+            ```json
+            {
+              "job_title": "Senior Software Engineer",
+              "company_name": "TechCorp Inc.",
+              "original_job_description": "We are looking for a senior software engineer...",
+              "resume_used": 1,
+              "date_applied": "2023-01-15",
+              "status": "Applied",
+              "notes": "Applied through company website"
+            }
+            ```
 
-    === ":material-pencil: **Update Application**"
+    === ":material-pencil: Update Application"
         
         !!! warning "PUT/PATCH `/api/job-applications/{id}/`"
-            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required
+            **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required  
+            **Description:** Update job application status and details
 
-    === ":material-delete: **Delete Application**"
+    === ":material-delete: Delete Application"
         
         !!! danger "DELETE `/api/job-applications/{id}/`"
             **Authentication:** :material-shield-check:{ style="color: #4caf50" } Required  
-            **Note:** This performs a soft delete (sets `is_deleted=true`)
+            **Description:** Soft delete (sets `is_deleted=true`)
 
-    === ":material-eye: **Example Applications**"
+    === ":material-eye: Example Applications"
         
         !!! tip "GET `/api/example-job-applications/`"
             **Authentication:** :material-shield-off:{ style="color: #9e9e9e" } Not Required  
-            **Description:** Returns up to 5 sample job applications for demo purposes
+            **Description:** Get up to 5 sample job applications for demo
 
 ---
 
 ## 📊 Data Models
 
 !!! abstract "Database Schema"
-    Complete data model specifications for all API resources.
+    Complete data model specifications for all API resources with field descriptions and constraints.
 
-=== "User Model"
-    
-    ```json
-    {
-      "id": "integer",
-      "username": "string (unique)",
-      "email": "string",
-      "is_active": "boolean",
-      "date_joined": "datetime"
-    }
-    ```
+!!! example "Model Specifications"
+    === ":material-account: User Model"
+        
+        !!! info "User Account Structure"
+            Core user model for authentication and authorization.
+        
+        ```json
+        {
+          "id": "integer (primary_key, auto_increment)",
+          "username": "string (unique, max_length: 150)",
+          "email": "string (valid_email, max_length: 254)",
+          "is_active": "boolean (default: true)",
+          "date_joined": "datetime (auto_now_add)"
+        }
+        ```
 
-=== "Resume Model"
-    
-    ```json
-    {
-      "id": "integer",
-      "user": "foreign_key (User)",
-      "title": "string (max_length: 255)",
-      "content": "text",
-      "created_at": "datetime",
-      "updated_at": "datetime"
-    }
-    ```
+    === ":material-file-document: Resume Model"
+        
+        !!! success "Resume Document Structure"
+            User-specific resume documents with content management.
+        
+        ```json
+        {
+          "id": "integer (primary_key, auto_increment)",
+          "user": "foreign_key (User, on_delete: cascade)",
+          "title": "string (max_length: 255)",
+          "content": "text (markdown_supported)",
+          "created_at": "datetime (auto_now_add)",
+          "updated_at": "datetime (auto_now)"
+        }
+        ```
 
-=== "AIModel Configuration"
-    
-    ```json
-    {
-      "display_name": "string (unique)",
-      "model_name": "string",
-      "api_provider": "choice (google_gemini, open_router)",
-      "api_key_name": "string",
-      "is_active": "boolean",
-      "login_required": "boolean",
-      "daily_limit": "positive_integer",
-      "response_time_info": "string",
-      "description": "text"
-    }
-    ```
+    === ":material-brain: AIModel Configuration"
+        
+        !!! tip "AI Model Settings"
+            Configuration for available AI models and their capabilities.
+        
+        ```json
+        {
+          "display_name": "string (unique, max_length: 100)",
+          "model_name": "string (max_length: 100)",
+          "api_provider": "choice ('google_gemini', 'open_router')",
+          "api_key_name": "string (max_length: 100)",
+          "is_active": "boolean (default: true)",
+          "login_required": "boolean (default: false)",
+          "daily_limit": "positive_integer (null: unlimited)",
+          "response_time_info": "string (max_length: 50)",
+          "description": "text"
+        }
+        ```
 
-=== "JobApplication Model"
-    
-    ```json
-    {
-      "id": "integer",
-      "user": "foreign_key (User)",
-      "job_title": "string",
-      "company_name": "string",
-      "original_job_description": "text",
-      "resume_used": "foreign_key (Resume, nullable)",
-      "date_applied": "date",
-      "status": "choice (Applied, Interviewing, Offer, Rejected)",
-      "notes": "text",
-      "is_deleted": "boolean",
-      "is_example": "boolean",
-      "created_at": "datetime",
-      "updated_at": "datetime"
-    }
-    ```
+    === ":material-briefcase: JobApplication Model"
+        
+        !!! warning "Job Application Structure"
+            Comprehensive job application tracking with status management.
+        
+        ```json
+        {
+          "id": "integer (primary_key, auto_increment)",
+          "user": "foreign_key (User, on_delete: cascade)",
+          "job_title": "string (max_length: 200)",
+          "company_name": "string (max_length: 200)",
+          "original_job_description": "text",
+          "resume_used": "foreign_key (Resume, null: true, blank: true)",
+          "date_applied": "date",
+          "status": "choice ('Applied', 'Interviewing', 'Offer', 'Rejected')",
+          "notes": "text (blank: true)",
+          "is_deleted": "boolean (default: false)",
+          "is_example": "boolean (default: false)",
+          "created_at": "datetime (auto_now_add)",
+          "updated_at": "datetime (auto_now)"
+        }
+        ```
 
 ---
 
 ## ⚠️ Error Handling
 
-!!! failure "Error Response Format"
-    Standardized error responses across all endpoints.
+!!! failure "Error Response System"
+    Standardized error responses across all endpoints with comprehensive status codes and detailed messages.
 
-### Standard HTTP Status Codes
+### 📋 HTTP Status Codes
 
-| Status Code | Description | Status |
-|:-----------:|:------------|:-------|
-| :material-check-circle:{ style="color: #4caf50" } **200** | OK - Request successful | <span class="status-badge success">✅ Success</span> |
-| :material-plus-circle:{ style="color: #4caf50" } **201** | Created - Resource created successfully | <span class="status-badge success">✅ Success</span> |
-| :material-alert-circle:{ style="color: #ff9800" } **400** | Bad Request - Invalid request data | <span class="status-badge warning">⚠️ Warning</span> |
-| :material-lock:{ style="color: #f44336" } **401** | Unauthorized - Authentication required | <span class="status-badge error">❌ Error</span> |
-| :material-cancel:{ style="color: #f44336" } **403** | Forbidden - Insufficient permissions | <span class="status-badge error">❌ Error</span> |
-| :material-help-circle:{ style="color: #2196f3" } **404** | Not Found - Resource not found | <span class="status-badge info">ℹ️ Info</span> |
-| :material-server-network:{ style="color: #f44336" } **503** | Service Unavailable - AI service error | <span class="status-badge error">❌ Error</span> |
-{: .premium-table .status-table }
+!!! example "Status Code Reference"
+    === ":material-check-circle: Success Codes"
+        
+        | Code | Status | Description |
+        |:----:|:-------|:-----------|
+        | **200** | :material-check-circle:{ style="color: #4caf50" } **OK** | Request successful |
+        | **201** | :material-plus-circle:{ style="color: #4caf50" } **Created** | Resource created successfully |
+        
+    === ":material-alert-circle: Client Error Codes"
+        
+        | Code | Status | Description |
+        |:----:|:-------|:-----------|
+        | **400** | :material-alert-circle:{ style="color: #ff9800" } **Bad Request** | Invalid request data |
+        | **401** | :material-lock:{ style="color: #f44336" } **Unauthorized** | Authentication required |
+        | **403** | :material-cancel:{ style="color: #f44336" } **Forbidden** | Insufficient permissions |
+        | **404** | :material-help-circle:{ style="color: #2196f3" } **Not Found** | Resource not found |
+        
+    === ":material-server-network: Server Error Codes"
+        
+        | Code | Status | Description |
+        |:----:|:-------|:-----------|
+        | **503** | :material-server-network:{ style="color: #f44336" } **Service Unavailable** | AI service error |
 
-### Error Response Format
-```json
-{
-  "error": "Error message description",
-  "field_errors": {
-    "field_name": ["Field-specific error message"]
-  }
-}
-```
+### 📝 Error Response Format
 
-### Common Error Examples
-
-=== "Authentication Error"
+!!! info "Standard Error Structure"
+    All API errors follow this consistent format for easy handling:
     
-    !!! danger "401 Unauthorized"
     ```json
     {
-      "detail": "Given token not valid for any token type"
+      "error": "Error message description",
+      "field_errors": {
+        "field_name": ["Field-specific error message"]
+      }
     }
     ```
 
-=== "Validation Error"
-    
-    !!! warning "400 Bad Request"
-    ```json
-    {
-      "password": ["Password fields didn't match."],
-      "email": ["This field is required."]
-    }
-    ```
+### 🚨 Common Error Examples
 
-=== "AI Service Error"
-    
-    !!! failure "503 Service Unavailable"
-    ```json
-    {
-      "error": "An error occurred while communicating with the AI service."
-    }
-    ```
+!!! example "Error Response Examples"
+    === ":material-lock: Authentication Error"
+        
+        !!! danger "401 Unauthorized"
+            When JWT token is invalid or expired:
+            
+            ```json
+            {
+              "detail": "Given token not valid for any token type"
+            }
+            ```
+
+    === ":material-alert-circle: Validation Error"
+        
+        !!! warning "400 Bad Request"
+            When request data fails validation:
+            
+            ```json
+            {
+              "password": ["Password fields didn't match."],
+              "email": ["This field is required."]
+            }
+            ```
+
+    === ":material-server-network: AI Service Error"
+        
+        !!! failure "503 Service Unavailable"
+            When AI model is temporarily unavailable:
+            
+            ```json
+            {
+              "error": "An error occurred while communicating with the AI service."
+            }
+            ```
+
+    === ":material-help-circle: Resource Not Found"
+        
+        !!! info "404 Not Found"
+            When requested resource doesn't exist:
+            
+            ```json
+            {
+              "detail": "Not found."
+            }
+            ```
 
 ---
 
 ## 🔒 Rate Limiting
 
-!!! info "Rate Limits"
-    API usage limits to ensure fair access and service stability.
+!!! info "API Usage Limits"
+    Fair usage policies and rate limits ensure service stability and equitable access for all users.
 
-- :material-robot:{ style="color: #9c27b0" } **AI Models**: Some models may have daily limits per user (configurable per model)
-- :material-account-off:{ style="color: #f44336" } **Anonymous Users**: Limited access to certain AI models
-- :material-account-check:{ style="color: #4caf50" } **Authenticated Users**: Higher rate limits and access to premium models
+!!! example "Rate Limit Types"
+    === ":material-robot: AI Model Limits"
+        
+        !!! warning "Daily Limits"
+            - Some AI models have **daily request limits** per user
+            - Limits are **configurable per model** in admin panel
+            - **Premium models** may have stricter limits
+        
+    === ":material-account-off: Anonymous Users"
+        
+        !!! note "Limited Access"
+            - **Limited AI models** available without authentication
+            - **No job application** or resume management
+            - **Example data** endpoints only
+        
+    === ":material-account-check: Authenticated Users"
+        
+        !!! tip "Enhanced Access"
+            - **Higher rate limits** for all endpoints
+            - **Access to premium** AI models
+            - **Full feature set** including CRUD operations
 
 ---
 
 ## 💡 Usage Examples
 
-!!! example "Code Examples"
-    Complete integration examples in multiple programming languages.
+!!! example "Integration Examples"
+    Complete code examples demonstrating API integration in multiple programming languages with authentication flow.
 
-=== "Python Example"
-    
-    ```python
-    import requests
-    
-    # 1. Register a new user
-    register_data = {
-        "username": "john_doe",
-        "email": "john@example.com",
-        "password": "SecurePass123!",
-        "password2": "SecurePass123!"
-    }
-    response = requests.post("https://arafat2.me/api/auth/register/", json=register_data)
-    
-    # 2. Get authentication token
-    login_data = {
-        "username": "john_doe",
-        "password": "SecurePass123!"
-    }
-    response = requests.post("https://arafat2.me/api/auth/token/", json=login_data)
-    tokens = response.json()
-    access_token = tokens["access"]
-    
-    # 3. Set up headers for authenticated requests
-    headers = {
-        "Authorization": f"Bearer {access_token}",
-        "Content-Type": "application/json"
-    }
-    
-    # 4. Generate a resume using AI
-    ai_data = {
-        "model": "Deepseek",
-        "user_input": "Software engineer with 5 years experience...",
-        "title": "Senior Developer Resume"
-    }
-    response = requests.post("https://arafat2.me/api/ai/generate/", 
-                            json=ai_data, headers=headers)
-    resume_data = response.json()
-    
-    # 5. Create a job application
-    job_data = {
-        "job_title": "Senior Software Engineer",
-        "company_name": "TechCorp Inc.",
-        "resume_used": resume_data["resume_id"],
-        "status": "Applied",
-        "date_applied": "2023-01-15"
-    }
-    response = requests.post("https://arafat2.me/api/job-applications/", 
-                            json=job_data, headers=headers)
-    
-    # 6. List all your resumes
-    response = requests.get("https://arafat2.me/api/resumes/", headers=headers)
-    resumes = response.json()
-    ```
+!!! info "Code Samples"
+    === ":material-console: cURL Commands"
+        
+        !!! tip "Command Line Examples"
+            Complete workflow using cURL for testing and automation:
+        
+        ```bash
+        #!/bin/bash
+        
+        # Configuration
+        BASE_URL="https://arafat2.me/api"
+        
+        # 1. Get available AI models (no auth required)
+        echo "=== Available AI Models ==="
+        curl -s "${BASE_URL}/ai/models/" | jq .
+        
+        # 2. Register new user
+        echo -e "\n=== User Registration ==="
+        curl -X POST "${BASE_URL}/auth/register/" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "username": "john_doe",
+            "email": "john@example.com",
+            "password": "SecurePass123!",
+            "password2": "SecurePass123!"
+          }' | jq .
+        
+        # 3. Get authentication token
+        echo -e "\n=== Authentication ==="
+        TOKEN_RESPONSE=$(curl -s -X POST "${BASE_URL}/auth/token/" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "username": "john_doe",
+            "password": "SecurePass123!"
+          }')
+        
+        ACCESS_TOKEN=$(echo $TOKEN_RESPONSE | jq -r .access)
+        echo "Access Token: ${ACCESS_TOKEN:0:20}..."
+        
+        # 4. Generate resume with AI
+        echo -e "\n=== AI Resume Generation ==="
+        RESUME_RESPONSE=$(curl -s -X POST "${BASE_URL}/ai/generate/" \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer $ACCESS_TOKEN" \
+          -d '{
+            "model": "Deepseek",
+            "user_input": "Software engineer with 5 years experience in Python, Django, React. Expert in cloud deployment.",
+            "title": "Senior Developer Resume"
+          }')
+        
+        RESUME_ID=$(echo $RESUME_RESPONSE | jq -r .resume_id)
+        echo "Generated Resume ID: $RESUME_ID"
+        
+        # 5. Create job application
+        echo -e "\n=== Job Application Creation ==="
+        curl -s -X POST "${BASE_URL}/job-applications/" \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer $ACCESS_TOKEN" \
+          -d "{
+            \"job_title\": \"Senior Software Engineer\",
+            \"company_name\": \"TechCorp Inc.\",
+            \"resume_used\": $RESUME_ID,
+            \"status\": \"Applied\",
+            \"date_applied\": \"$(date +%Y-%m-%d)\"
+          }" | jq .
+        
+        # 6. List all user resumes
+        echo -e "\n=== User Resumes ==="
+        curl -s -H "Authorization: Bearer $ACCESS_TOKEN" \
+          "${BASE_URL}/resumes/" | jq .
+        ```
+    === ":material-language-python: Python Integration"
+        
+        !!! success "Complete Python Example"
+            Full workflow from registration to resume generation and job tracking:
+        
+        ```python
+        import requests
+        
+        # API Configuration
+        BASE_URL = "https://arafat2.me/api/"
+        
+        class ResuMateClient:
+            def __init__(self):
+                self.base_url = BASE_URL
+                self.token = None
+                self.headers = {"Content-Type": "application/json"}
+        
+            def register(self, username, email, password):
+                """Register a new user account"""
+                data = {
+                    "username": username,
+                    "email": email,
+                    "password": password,
+                    "password2": password
+                }
+                response = requests.post(f"{self.base_url}auth/register/", json=data)
+                return response.json()
+        
+            def login(self, username, password):
+                """Authenticate and get tokens"""
+                data = {"username": username, "password": password}
+                response = requests.post(f"{self.base_url}auth/token/", json=data)
+                tokens = response.json()
+                self.token = tokens["access"]
+                self.headers["Authorization"] = f"Bearer {self.token}"
+                return tokens
+        
+            def generate_resume(self, model, user_input, title):
+                """Generate AI-powered resume"""
+                data = {
+                    "model": model,
+                    "user_input": user_input,
+                    "title": title
+                }
+                response = requests.post(
+                    f"{self.base_url}ai/generate/", 
+                    json=data, 
+                    headers=self.headers
+                )
+                return response.json()
+        
+            def create_job_application(self, job_data):
+                """Create new job application"""
+                response = requests.post(
+                    f"{self.base_url}job-applications/", 
+                    json=job_data, 
+                    headers=self.headers
+                )
+                return response.json()
+        
+        # Usage Example
+        client = ResuMateClient()
+        
+        # 1. Register and login
+        client.register("john_doe", "john@example.com", "SecurePass123!")
+        client.login("john_doe", "SecurePass123!")
+        
+        # 2. Generate resume
+        resume = client.generate_resume(
+            model="Deepseek",
+            user_input="Software engineer with 5 years experience...",
+            title="Senior Developer Resume"
+        )
+        
+        # 3. Create job application
+        job_app = client.create_job_application({
+            "job_title": "Senior Software Engineer",
+            "company_name": "TechCorp Inc.",
+            "resume_used": resume["resume_id"],
+            "status": "Applied",
+            "date_applied": "2023-01-15"
+        })
+        ```
 
-=== "JavaScript/Frontend"
-    
-    ```javascript
-    // Authentication and API calls
-    class ResuMateAPI {
-        constructor(baseURL = 'https://arafat2.me/api/') {
-            this.baseURL = baseURL;
-            this.token = localStorage.getItem('access_token');
-        }
-    
-        async login(username, password) {
-            const response = await fetch(`${this.baseURL}auth/token/`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password })
-            });
-            
-            if (response.ok) {
-                const tokens = await response.json();
+    === ":material-language-javascript: JavaScript/Frontend"
+        
+        !!! info "Modern JavaScript Class"
+            ES6+ implementation with async/await and error handling:
+        
+        ```javascript
+        class ResuMateAPI {
+            constructor(baseURL = 'https://arafat2.me/api/') {
+                this.baseURL = baseURL;
+                this.token = localStorage.getItem('access_token');
+            }
+        
+            async makeRequest(endpoint, options = {}) {
+                const url = `${this.baseURL}${endpoint}`;
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    },
+                    ...options
+                };
+        
+                if (this.token) {
+                    config.headers.Authorization = `Bearer ${this.token}`;
+                }
+        
+                try {
+                    const response = await fetch(url, config);
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    return await response.json();
+                } catch (error) {
+                    console.error('API Request failed:', error);
+                    throw error;
+                }
+            }
+        
+            async register(username, email, password) {
+                return this.makeRequest('auth/register/', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        username, email, 
+                        password, password2: password
+                    })
+                });
+            }
+        
+            async login(username, password) {
+                const tokens = await this.makeRequest('auth/token/', {
+                    method: 'POST',
+                    body: JSON.stringify({ username, password })
+                });
+                
                 this.token = tokens.access;
                 localStorage.setItem('access_token', this.token);
                 return tokens;
             }
-            throw new Error('Login failed');
+        
+            async generateResume(model, userInput, title) {
+                return this.makeRequest('ai/generate/', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        model, user_input: userInput, title
+                    })
+                });
+            }
+        
+            async getResumes() {
+                return this.makeRequest('resumes/');
+            }
+        
+            async createJobApplication(jobData) {
+                return this.makeRequest('job-applications/', {
+                    method: 'POST',
+                    body: JSON.stringify(jobData)
+                });
+            }
         }
-    
-        async generateResume(model, userInput, title) {
-            const response = await fetch(`${this.baseURL}ai/generate/`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${this.token}`
-                },
-                body: JSON.stringify({ model, user_input: userInput, title })
-            });
-            
-            return response.json();
+        
+        // Usage Example
+        const api = new ResuMateAPI();
+        
+        async function example() {
+            try {
+                await api.login('john_doe', 'SecurePass123!');
+                const resume = await api.generateResume(
+                    'Deepseek', 
+                    'Software engineer...', 
+                    'My Resume'
+                );
+                console.log('Resume generated:', resume);
+            } catch (error) {
+                console.error('Error:', error);
+            }
         }
-    
-        async getResumes() {
-            const response = await fetch(`${this.baseURL}resumes/`, {
-                headers: { 'Authorization': `Bearer ${this.token}` }
-            });
-            
-            return response.json();
-        }
-    }
-    
-    // Usage
-    const api = new ResuMateAPI();
-    await api.login('john_doe', 'SecurePass123!');
-    const resume = await api.generateResume('Deepseek', 'Software engineer...', 'My Resume');
-    ```
-
-=== "cURL Examples"
-    
-    ```bash
-    # Get available AI models (no auth required)
-    curl https://arafat2.me/api/ai/models/
-    
-    # Register new user
-    curl -X POST https://arafat2.me/api/auth/register/ \
-      -H "Content-Type: application/json" \
-      -d '{
-        "username": "john_doe",
-        "email": "john@example.com",
-        "password": "SecurePass123!",
-        "password2": "SecurePass123!"
-      }'
-    
-    # Get authentication token
-    curl -X POST https://arafat2.me/api/auth/token/ \
-      -H "Content-Type: application/json" \
-      -d '{
-        "username": "john_doe",
-        "password": "SecurePass123!"
-      }'
-    
-    # Generate resume with AI
-    curl -X POST https://arafat2.me/api/ai/generate/ \
-      -H "Content-Type: application/json" \
-      -H "Authorization: Bearer YOUR_TOKEN_HERE" \
-      -d '{
-        "model": "Deepseek",
-        "user_input": "Software engineer with 5 years experience...",
-        "title": "Senior Developer Resume"
-      }'
-    
-    # List user resumes
-    curl -H "Authorization: Bearer YOUR_TOKEN_HERE" \
-      https://arafat2.me/api/resumes/
-    ```
-
+        ```
 ---
 
 ## 🛠️ Development Notes
 
-!!! note "Technical Stack"
-    Modern, scalable technology stack with enterprise-grade components.
+!!! note "Technical Architecture"
+    Modern, enterprise-grade technology stack designed for scalability, security, and maintainability.
 
-=== "Backend Technologies"
-    
-    | Technology | Component | Purpose |
-    |:----------:|:---------:|:--------|
-    | **🐍 Backend** | <span class="tech-highlight">Django 5.0.14</span> | Web framework & REST API |
-    | **🗄️ Database** | <span class="tech-highlight">PostgreSQL</span> | Primary data storage with psycopg2-binary |
-    | **🔐 Authentication** | <span class="tech-highlight">JWT Tokens</span> | djangorestframework-simplejwt |
-    | **🤖 AI Integration** | <span class="tech-highlight">Google Genai</span> | AI-powered resume generation |
-    | **🔀 AI Router** | <span class="tech-highlight">OpenAI SDK</span> | Multiple AI model support |
-    | **🚀 Deployment** | <span class="tech-highlight">Gunicorn</span> | Production WSGI server |
-    | **📁 Static Files** | <span class="tech-highlight">WhiteNoise</span> | Static asset serving |
-    {: .premium-table .backend-tech-table }
+!!! example "Technology Stack"
+    === ":material-server: Backend Technologies"
+        
+        !!! info "Core Framework"
+            **Django 5.0.14** - Robust web framework with built-in admin, ORM, and security features
+        
+        | Component | Technology | Purpose |
+        |:----------|:-----------|:--------|
+        | **🐍 Web Framework** | :material-language-python:{ style="color: #3776ab" } Django 5.0.14 | REST API development & admin interface |
+        | **🗄️ Database** | :material-database:{ style="color: #336791" } PostgreSQL | Primary data storage with ACID compliance |
+        | **🔗 Database Driver** | :material-cable-data:{ style="color: #336791" } psycopg2-binary | High-performance PostgreSQL adapter |
+        | **🔐 Authentication** | :material-key:{ style="color: #ff9800" } JWT (Simple JWT) | Stateless token-based authentication |
+        | **🤖 AI Integration** | :material-brain:{ style="color: #4285f4" } Google Gemini API | Advanced AI-powered content generation |
+        | **🔀 AI Router** | :material-router:{ style="color: #10a37f" } OpenAI SDK | Multi-provider AI model support |
+        | **🚀 WSGI Server** | :material-rocket-launch:{ style="color: #e74c3c" } Gunicorn | Production-ready HTTP server |
+        | **📁 Static Files** | :material-file-multiple:{ style="color: #795548" } WhiteNoise | Efficient static asset serving |
 
-=== "Environment Variables"
-    
-    ```bash
-    # Database Configuration
-    DB_NAME=resumate_db
-    DB_USER=postgres
-    DB_PASSWORD=your_password
-    DB_HOST=localhost
-    DB_PORT=5432
-    
-    # Django Configuration
-    SECRET_KEY=your_secret_key
-    DEBUG=False
-    ALLOWED_HOSTS=arafat2.me,localhost
-    
-    # AI Services
-    GOOGLE_GEMINI_API_KEY=your_gemini_key
-    OPENROUTER_API_KEY=your_openrouter_key
-    
-    # Admin User
-    DJANGO_SUPERUSER_USERNAME=admin
-    DJANGO_SUPERUSER_EMAIL=admin@example.com
-    DJANGO_SUPERUSER_PASSWORD=admin_password
-    ```
+    === ":material-cog: Environment Configuration"
+        
+        !!! warning "Required Environment Variables"
+            Secure configuration management using environment variables:
+        
+        ```bash
+        # Database Configuration
+        DB_NAME=resumate_db              # PostgreSQL database name
+        DB_USER=postgres                 # Database username
+        DB_PASSWORD=your_password        # Database password
+        DB_HOST=localhost                # Database host
+        DB_PORT=5432                     # Database port
+        
+        # Django Configuration
+        SECRET_KEY=your_secret_key       # Django secret key (50+ chars)
+        DEBUG=False                      # Production: False, Development: True
+        ALLOWED_HOSTS=arafat2.me,localhost # Comma-separated allowed hosts
+        
+        # AI Service Configuration
+        GOOGLE_GEMINI_API_KEY=your_gemini_key    # Google Gemini API key
+        OPENROUTER_API_KEY=your_openrouter_key   # OpenRouter API key
+        
+        # Admin User (Auto-created)
+        DJANGO_SUPERUSER_USERNAME=admin          # Admin username
+        DJANGO_SUPERUSER_EMAIL=admin@example.com # Admin email
+        DJANGO_SUPERUSER_PASSWORD=admin_password # Admin password
+        ```
 
-=== "Setup Commands"
-    
-    ```bash
-    # Database Migrations
-    python manage.py makemigrations
-    python manage.py migrate
-    python manage.py create_superuser_if_not_exists
-    
-    # Development Server
-    python manage.py runserver
-    
-    # Production Deployment
-    gunicorn ResuMate_backend.wsgi:application
-    ```
+    === ":material-console-line: Setup & Deployment"
+        
+        !!! tip "Development Setup"
+            Complete setup process for local development:
+        
+        ```bash
+        # 1. Database Setup
+        python manage.py makemigrations     # Create migration files
+        python manage.py migrate            # Apply database migrations
+        python manage.py create_superuser_if_not_exists  # Create admin user
+        
+        # 2. Development Server
+        python manage.py runserver 0.0.0.0:8000  # Start development server
+        
+        # 3. Production Deployment
+        python manage.py collectstatic --noinput  # Collect static files
+        gunicorn ResuMate_backend.wsgi:application # Start production server
+        
+        # 4. Database Management
+        python manage.py dbshell            # Access database shell
+        python manage.py shell              # Django shell access
+        
+        # 5. Maintenance Commands
+        python manage.py check              # System check
+        python manage.py test               # Run test suite
+        ```
+        
+        !!! success "Production Deployment"
+            Recommended production setup:
+        
+        ```bash
+        # Docker Deployment (Recommended)
+        docker-compose up -d                # Start all services
+        
+        # Manual Deployment
+        pip install -r requirements.txt    # Install dependencies
+        gunicorn --bind 0.0.0.0:8000 ResuMate_backend.wsgi:application
+        ```
+
+    === ":material-api: API Features"
+        
+        !!! abstract "Key Capabilities"
+            Comprehensive API features and integrations:
+        
+        - **🔐 JWT Authentication** - :material-shield-check:{ style="color: #4caf50" } Secure stateless authentication
+        - **📄 Resume CRUD** - :material-file-document-multiple:{ style="color: #2196f3" } Complete resume management system
+        - **🤖 Multi-AI Support** - :material-brain:{ style="color: #9c27b0" } Google Gemini & OpenRouter integration
+        - **📊 Job Tracking** - :material-clipboard-list:{ style="color: #ff9800" } Application status management
+        - **🗄️ PostgreSQL** - :material-database:{ style="color: #336791" } Robust data persistence
+        - **📖 Browsable API** - :material-api:{ style="color: #607d8b" } Django REST Framework interface
+        - **🛡️ Admin Panel** - :material-shield-crown:{ style="color: #e91e63" } Django admin for data management
+        - **🚀 Production Ready** - :material-rocket-launch:{ style="color: #4caf50" } Gunicorn + WhiteNoise deployment
 
 ---
 
 ## 📞 Support & Contact
 
-!!! tip "Get Help"
-    Multiple channels for support, feedback, and collaboration.
+!!! tip "Get Help & Connect"
+    Multiple channels available for support, feedback, collaboration, and API assistance.
 
-=== "Contact Information"
-    
-    | Role | Contact | Link |
-    |:----:|:-------:|:-----|
-    | **👨‍💻 Developer** | <span class="contact-name">Arafat Hossain</span> | Professional developer & architect |
-    | **📧 Email** | <span class="contact-link">[arafat6462@gmail.com](mailto:arafat6462@gmail.com)</span> | Direct communication |
-    | **🐙 GitHub** | <span class="contact-link">[github.com/Arafat6462](https://github.com/Arafat6462)</span> | Source code & projects |
-    | **🌐 Live API** | <span class="contact-link">[arafat2.me/api/](https://arafat2.me/api/)</span> | Production API endpoint |
-    | **📚 Documentation** | <span class="contact-highlight">This Site</span> | Complete API reference |
-    {: .premium-table .contact-table }
+!!! example "Contact & Resources"
+    === ":material-account-circle: Developer Information"
+        
+        !!! info "Arafat Hossain"
+            **Full-Stack Developer & API Architect**
+            
+            Experienced in building scalable web applications, REST APIs, and AI-powered solutions.
+        
+        | Contact Method | Details | Purpose |
+        |:---------------|:--------|:--------|
+        | **📧 Email** | :material-email:{ style="color: #d44638" } [arafat6462@gmail.com](mailto:arafat6462@gmail.com) | Direct communication & support |
+        | **🐙 GitHub** | :material-github:{ style="color: #24292e" } [github.com/Arafat6462](https://github.com/Arafat6462) | Source code & project portfolio |
+        | **🌐 Portfolio** | :material-web:{ style="color: #2196f3" } [arafat2.me](https://arafat2.me) | Professional portfolio & projects |
 
-=== "Quick Links"
-    
-    | Service | Description | Access Level |
-    |:-------:|:------------|:-------------|
-    | **🧠 AI Models** | <span class="service-link">[Try AI Models](https://arafat2.me/api/ai/models/)</span> | <span class="access-public">🌐 No Auth Required</span> |
-    | **👁️ Example Data** | <span class="service-link">[Example Applications](https://arafat2.me/api/example-job-applications/)</span> | <span class="access-public">🌐 Sample Data</span> |
-    | **🛡️ Admin Panel** | <span class="service-link">[API Admin](https://arafat2.me/admin/)</span> | <span class="access-admin">🔐 Admin Only</span> |
-    | **🔌 API Root** | <span class="service-link">[API Root](https://arafat2.me/api/)</span> | <span class="access-browse">📖 Browsable API</span> |
-    | **📋 Swagger** | <span class="service-link">[API Docs](https://arafat2.me/api/docs/)</span> | <span class="access-interactive">⚡ Interactive</span> |
-    {: .premium-table .quick-links-table }
+    === ":material-link: API Resources"
+        
+        !!! success "Live Endpoints"
+            Test and explore the API directly:
+        
+        | Resource | Description | Access Level |
+        |:---------|:------------|:-------------|
+        | **🧠 AI Models** | [/api/ai/models/](https://arafat2.me/api/ai/models/) | :material-shield-off: Public |
+        | **👁️ Examples** | [/api/example-job-applications/](https://arafat2.me/api/example-job-applications/) | :material-shield-off: Public |
+        | **🔌 API Root** | [/api/](https://arafat2.me/api/) | :material-shield-off: Browsable |
+        | **🛡️ Admin** | [/admin/](https://arafat2.me/admin/) | :material-shield-check: Admin Only |
+        | **� Swagger** | [/api/docs/](https://arafat2.me/api/docs/) | :material-shield-off: Interactive |
+
+    === ":material-help-circle: Support Options"
+        
+        !!! question "Need Help?"
+            Choose the best support channel for your needs:
+        
+        - **� Bug Reports** - GitHub Issues or direct email
+        - **💡 Feature Requests** - Email with detailed requirements
+        - **📖 API Questions** - Check documentation or contact directly
+        - **🤝 Collaboration** - Professional inquiries welcome
+        - **📱 Integration Help** - Code examples and guidance available
 
 ---
 
-!!! success "Ready to Get Started?"
-    :material-rocket:{ style="color: #ff9800" } Start by exploring the [available AI models](https://arafat2.me/api/ai/models/) or dive into the [authentication flow](#authentication) to begin building with ResuMate API.
+## 🚀 Quick Start Guide
 
-    **Quick Start Checklist:**
-    
-    - [ ] Test [AI Models endpoint](https://arafat2.me/api/ai/models/) (no auth required)
-    - [ ] Register a new user account
-    - [ ] Generate your first resume with AI
-    - [ ] Create and track job applications
+!!! success "Ready to Build?"
+    Get up and running with ResuMate API in minutes with our step-by-step guide.
+
+!!! example "Getting Started"
+    === ":material-rocket-launch: Immediate Testing"
+        
+        !!! tip "No Authentication Required"
+            Try these endpoints right now in your browser:
+        
+        1. **🧠 [Available AI Models](https://arafat2.me/api/ai/models/)** - :material-brain:{ style="color: #9c27b0" } Test AI capabilities
+        2. **📋 [Example Applications](https://arafat2.me/api/example-job-applications/)** - :material-clipboard-list:{ style="color: #ff9800" } Sample data
+        3. **🔌 [API Root Explorer](https://arafat2.me/api/)** - :material-api:{ style="color: #607d8b" } Browse all endpoints
+
+    === ":material-account-plus: Account Setup"
+        
+        !!! info "Create Your Account"
+            **Steps to get authenticated access:**
+        
+        1. **Register** - :material-account-plus:{ style="color: #4caf50" } Create account via `/api/auth/register/`
+        2. **Login** - :material-login:{ style="color: #2196f3" } Get tokens via `/api/auth/token/`
+        3. **Generate** - :material-auto-fix:{ style="color: #9c27b0" } Create AI-powered resume
+        4. **Track** - :material-clipboard-list:{ style="color: #ff9800" } Manage job applications
+
+    === ":material-code-braces: Integration"
+        
+        !!! abstract "Development Integration"
+            **Choose your preferred method:**
+        
+        - **Python** - :material-language-python:{ style="color: #3776ab" } Use requests library ([see example](#usage-examples))
+        - **JavaScript** - :material-language-javascript:{ style="color: #f7df1e" } Fetch API or axios ([see example](#usage-examples))
+        - **cURL** - :material-console:{ style="color: #4caf50" } Command line testing ([see example](#usage-examples))
+        - **Other** - :material-code-braces:{ style="color: #607d8b" } Standard HTTP REST API calls
 
 ---
 
-!!! abstract "API Status"
-    :material-check-circle:{ style="color: #4caf50" } **Live** • :material-update:{ style="color: #2196f3" } Last Updated: July 2025 • :material-api:{ style="color: #9c27b0" } Version 1.0
+!!! abstract "API Status & Information"
+    :material-check-circle:{ style="color: #4caf50" } **Status:** Live & Stable  
+    :material-update:{ style="color: #2196f3" } **Last Updated:** July 2025  
+    :material-api:{ style="color: #9c27b0" } **Version:** 1.0  
+    :material-shield-check:{ style="color: #4caf50" } **Security:** JWT Authentication  
+    :material-database:{ style="color: #336791" } **Database:** PostgreSQL  
+    :material-brain:{ style="color: #9c27b0" } **AI:** Multi-model Support
