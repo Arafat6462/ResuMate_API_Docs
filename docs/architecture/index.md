@@ -1,14 +1,14 @@
 # 🏗️ ResuMate Architecture
 
-!!! abstract "Architecture Overview"
-    Modern, scalable Django REST API with AI integration, containerized deployment, and enterprise-grade database design.
+!!! abstract ":material-information:{ style="color: #4caf50" } Architecture Overview"
+    **Modern, scalable Django REST API** with AI integration, containerized deployment, and enterprise-grade database design for production-ready applications.
 
 ---
 
-## 🎯 High-Level Architecture
+## :material-target:{ style="color: #ff5722" } High-Level Architecture
 
-!!! note "System Components"
-    ResuMate follows a **3-tier architecture** with clear separation of concerns, microservices-ready design, and horizontal scalability.
+!!! note ":material-layers:{ style="color: #9c27b0" } System Components"
+    ResuMate follows a **3-tier architecture** with clear separation of concerns, microservices-ready design, and horizontal scalability for enterprise-grade performance.
 
 ```mermaid
 graph TB
@@ -69,10 +69,10 @@ graph TB
 
 ---
 
-## 📊 Database Schema (ERD)
+## :material-database:{ style="color: #336791" } Database Schema (ERD)
 
-!!! info "Entity Relationship Diagram"
-    PostgreSQL database with optimized relationships, soft deletes, and audit trails.
+!!! info ":material-relation-many-to-many:{ style="color: #4caf50" } Entity Relationship Diagram"
+    PostgreSQL database with optimized relationships, soft deletes, and audit trails for enterprise-grade data management.
 
 ```mermaid
 erDiagram
@@ -135,33 +135,33 @@ erDiagram
 
 **Key Database Features:**
 
-=== "🔑 Primary Relationships"
+=== ":material-key:{ style="color: #ffc107" } Primary Relationships"
     
-    - **User ↔ Resume**: One-to-Many (User can have multiple resumes)
-    - **User ↔ JobApplication**: One-to-Many (User can have multiple applications) 
-    - **Resume ↔ JobApplication**: One-to-Many (Resume can be used for multiple applications)
-    - **Anonymous User Support**: Special user account for non-authenticated resume generation
+    - **:material-account-arrow-right:{ style="color: #4caf50" } User ↔ Resume**: One-to-Many (User can have multiple resumes)
+    - **:material-account-arrow-right:{ style="color: #2196f3" } User ↔ JobApplication**: One-to-Many (User can have multiple applications) 
+    - **:material-file-arrow-right:{ style="color: #ff9800" } Resume ↔ JobApplication**: One-to-Many (Resume can be used for multiple applications)
+    - **:material-account-question:{ style="color: #9c27b0" } Anonymous User Support**: Special user account for non-authenticated resume generation
 
-=== "🛡️ Data Integrity"
+=== ":material-shield-check:{ style="color: #4caf50" } Data Integrity"
     
-    - **Soft Deletes**: JobApplication uses `is_deleted` flag instead of hard deletion
-    - **Audit Trails**: All models include `created_at` and `updated_at` timestamps
-    - **Cascade Protection**: Resume deletion sets JobApplication.resume_used to NULL
-    - **Unique Constraints**: Username and AI model display names enforced at DB level
+    - **:material-delete-restore:{ style="color: #ff9800" } Soft Deletes**: JobApplication uses `is_deleted` flag instead of hard deletion
+    - **:material-history:{ style="color: #2196f3" } Audit Trails**: All models include `created_at` and `updated_at` timestamps
+    - **:material-shield-lock:{ style="color: #f44336" } Cascade Protection**: Resume deletion sets JobApplication.resume_used to NULL
+    - **:material-check-bold:{ style="color: #4caf50" } Unique Constraints**: Username and AI model display names enforced at DB level
 
-=== "⚡ Performance Optimizations"
+=== ":material-lightning-bolt:{ style="color: #ffeb3b" } Performance Optimizations"
     
-    - **Indexed Fields**: Foreign keys automatically indexed for fast joins
-    - **Selective Queries**: Default filtering excludes soft-deleted records
-    - **Connection Pooling**: PostgreSQL with psycopg2-binary for optimized connections
-    - **Query Optimization**: Django ORM with select_related and prefetch_related
+    - **:material-database-arrow-up:{ style="color: #4caf50" } Indexed Fields**: Foreign keys automatically indexed for fast joins
+    - **:material-filter:{ style="color: #2196f3" } Selective Queries**: Default filtering excludes soft-deleted records
+    - **:material-connection:{ style="color: #9c27b0" } Connection Pooling**: PostgreSQL with psycopg2-binary for optimized connections
+    - **:material-chart-line:{ style="color: #ff9800" } Query Optimization**: Django ORM with select_related and prefetch_related
 
 ---
 
-## 🔄 API Request Flow
+## :material-swap-horizontal:{ style="color: #4caf50" } API Request Flow
 
-!!! success "Request Processing Pipeline"
-    Complete request lifecycle from client to response with security, validation, and AI integration.
+!!! success ":material-pipeline:{ style="color: #2196f3" } Request Processing Pipeline"
+    Complete request lifecycle from client to response with security, validation, and AI integration for seamless user experience.
 
 ```mermaid
 sequenceDiagram
@@ -215,7 +215,7 @@ sequenceDiagram
 
 **Flow Breakdown:**
 
-=== "1️⃣ Authentication Layer"
+=== ":material-numeric-1-circle:{ style="color: #4caf50" } Authentication Layer"
     
     ```python
     # JWT Token Validation
@@ -227,7 +227,7 @@ sequenceDiagram
         permissions = get_anonymous_permissions()
     ```
 
-=== "2️⃣ Business Logic Layer"
+=== ":material-numeric-2-circle:{ style="color: #2196f3" } Business Logic Layer"
     
     ```python
     # AI Model Selection & Validation
@@ -240,7 +240,7 @@ sequenceDiagram
         raise PermissionError("Authentication required")
     ```
 
-=== "3️⃣ External Service Integration"
+=== ":material-numeric-3-circle:{ style="color: #ff9800" } External Service Integration"
     
     ```python
     # AI API Call with Error Handling
@@ -258,57 +258,57 @@ sequenceDiagram
 
 ---
 
-## 🔧 Technology Stack
+## :material-cog:{ style="color: #607d8b" } Technology Stack
 
-!!! note "Modern Tech Stack"
-    Enterprise-grade technologies chosen for scalability, performance, and maintainability.
+!!! note ":material-stack-overflow:{ style="color: #ff9800" } Modern Tech Stack"
+    Enterprise-grade technologies chosen for scalability, performance, and maintainability in production environments.
 
-=== "🎯 Backend Core"
+=== ":material-target:{ style="color: #4caf50" } Backend Core"
     
     <div class="premium-table">
     
     | Component | Technology | Version | Purpose |
     |:---------:|:----------:|:-------:|:--------|
-    | **🎯 Framework** | <span class="tech-highlight">Django</span> | <span class="version-badge">5.0.14</span> | Web framework & ORM |
-    | **🔌 API Layer** | <span class="tech-highlight">Django REST Framework</span> | <span class="version-badge">Latest</span> | RESTful API development |
-    | **🗄️ Database** | <span class="tech-highlight">PostgreSQL</span> | <span class="version-badge">16+</span> | Primary data storage |
-    | **⚡ Caching** | <span class="tech-highlight">Redis</span> | <span class="version-badge">7+</span> | Session & query caching |
-    | **🔐 Authentication** | <span class="tech-highlight">JWT</span> | <span class="version-badge">simplejwt</span> | Stateless authentication |
+    | **:material-language-python:{ style="color: #3776ab" } Framework** | <span class="tech-highlight">Django</span> | <span class="version-badge">5.0.14</span> | Web framework & ORM |
+    | **:material-api:{ style="color: #4caf50" } API Layer** | <span class="tech-highlight">Django REST Framework</span> | <span class="version-badge">Latest</span> | RESTful API development |
+    | **:material-database:{ style="color: #336791" } Database** | <span class="tech-highlight">PostgreSQL</span> | <span class="version-badge">16+</span> | Primary data storage |
+    | **:material-lightning-bolt:{ style="color: #dc382d" } Caching** | <span class="tech-highlight">Redis</span> | <span class="version-badge">7+</span> | Session & query caching |
+    | **:material-shield-check:{ style="color: #4caf50" } Authentication** | <span class="tech-highlight">JWT</span> | <span class="version-badge">simplejwt</span> | Stateless authentication |
     
     </div>
 
-=== "🤖 AI Integration"
+=== ":material-brain:{ style="color: #9c27b0" } AI Integration"
     
     <div class="premium-table ai-table">
     
     | Service | Provider | Model | Access Level |
     |:-------:|:--------:|:-----:|:-------------|
-    | **🧠 Google Gemini** | <span class="provider-google">Google AI</span> | <span class="model-premium">gemini-2.0-flash-exp</span> | <span class="access-auth">🔐 Authenticated (5/day)</span> |
-    | **🚀 Deepseek** | <span class="provider-openrouter">OpenRouter</span> | <span class="model-free">deepseek/deepseek-r1</span> | <span class="access-public">🌐 Public (Unlimited)</span> |
-    | **⚡ Cypher** | <span class="provider-openrouter">OpenRouter</span> | <span class="model-free">teknium/openhermes-2.5</span> | <span class="access-public">🌐 Public (Unlimited)</span> |
+    | **:material-brain:{ style="color: #4285f4" } Google Gemini** | <span class="provider-google">Google AI</span> | <span class="model-premium">gemini-2.0-flash-exp</span> | <span class="access-auth">:material-lock:{ style="color: #f44336" } Authenticated (5/day)</span> |
+    | **:material-rocket-launch:{ style="color: #ff5722" } Deepseek** | <span class="provider-openrouter">OpenRouter</span> | <span class="model-free">deepseek/deepseek-r1</span> | <span class="access-public">:material-earth:{ style="color: #4caf50" } Public (Unlimited)</span> |
+    | **:material-lightning-bolt:{ style="color: #ffeb3b" } Cypher** | <span class="provider-openrouter">OpenRouter</span> | <span class="model-free">teknium/openhermes-2.5</span> | <span class="access-public">:material-earth:{ style="color: #4caf50" } Public (Unlimited)</span> |
     
     </div>
 
-=== "🐳 DevOps & Infrastructure"
+=== ":material-docker:{ style="color: #2496ed" } DevOps & Infrastructure"
     
     <div class="premium-table devops-table">
     
     | Component | Technology | Purpose |
     |:---------:|:----------:|:--------|
-    | **🐳 Containerization** | <span class="tech-highlight">Docker + Compose</span> | Development & deployment |
-    | **🔄 CI/CD** | <span class="tech-highlight">GitHub Actions</span> | Automated testing & deployment |
-    | **🌐 Web Server** | <span class="tech-highlight">Gunicorn + Nginx</span> | Production WSGI server |
-    | **📊 Monitoring** | <span class="tech-highlight">Django Logging</span> | Error tracking & performance |
-    | **📁 Static Files** | <span class="tech-highlight">WhiteNoise</span> | Static asset serving |
+    | **:material-docker:{ style="color: #2496ed" } Containerization** | <span class="tech-highlight">Docker + Compose</span> | Development & deployment |
+    | **:material-source-branch:{ style="color: #4caf50" } CI/CD** | <span class="tech-highlight">GitHub Actions</span> | Automated testing & deployment |
+    | **:material-web:{ style="color: #009639" } Web Server** | <span class="tech-highlight">Gunicorn + Nginx</span> | Production WSGI server |
+    | **:material-chart-line:{ style="color: #ff9800" } Monitoring** | <span class="tech-highlight">Django Logging</span> | Error tracking & performance |
+    | **:material-file-multiple:{ style="color: #795548" } Static Files** | <span class="tech-highlight">WhiteNoise</span> | Static asset serving |
     
     </div>
 
 ---
 
-## 🛡️ Security Architecture
+## :material-shield-lock:{ style="color: #f44336" } Security Architecture
 
-!!! warning "Security Features"
-    Multi-layered security approach with authentication, authorization, and data protection.
+!!! warning ":material-security:{ style="color: #ff5722" } Security Features"
+    Multi-layered security approach with authentication, authorization, and data protection for enterprise-grade security.
 
 ```mermaid
 graph LR
@@ -346,33 +346,33 @@ graph LR
 
 **Security Implementation:**
 
-=== "🔐 Authentication"
+=== ":material-lock:{ style="color: #4caf50" } Authentication"
     
-    - **JWT Tokens**: Stateless, secure token-based authentication
-    - **Token Refresh**: Automatic token renewal for seamless UX
-    - **Anonymous Access**: Limited functionality for non-authenticated users
-    - **Permission Levels**: Granular access control per endpoint
+    - **:material-key:{ style="color: #ff9800" } JWT Tokens**: Stateless, secure token-based authentication
+    - **:material-refresh:{ style="color: #2196f3" } Token Refresh**: Automatic token renewal for seamless UX
+    - **:material-account-question:{ style="color: #9c27b0" } Anonymous Access**: Limited functionality for non-authenticated users
+    - **:material-shield-account:{ style="color: #4caf50" } Permission Levels**: Granular access control per endpoint
 
-=== "🛡️ Data Protection"
+=== ":material-shield-check:{ style="color: #4caf50" } Data Protection"
     
-    - **Environment Variables**: Sensitive data stored securely
-    - **API Key Rotation**: Support for key rotation without downtime
-    - **Soft Deletes**: Data retention for audit and recovery
-    - **SQL Injection Protection**: Django ORM prevents SQL injection
+    - **:material-environment-variable:{ style="color: #607d8b" } Environment Variables**: Sensitive data stored securely
+    - **:material-key-change:{ style="color: #ff9800" } API Key Rotation**: Support for key rotation without downtime
+    - **:material-delete-restore:{ style="color: #2196f3" } Soft Deletes**: Data retention for audit and recovery
+    - **:material-shield-bug:{ style="color: #f44336" } SQL Injection Protection**: Django ORM prevents SQL injection
 
-=== "⚡ Performance Security"
+=== ":material-lightning-bolt:{ style="color: #ffeb3b" } Performance Security"
     
-    - **Rate Limiting**: Per-user and per-endpoint throttling
-    - **Request Size Limits**: Protection against large payload attacks
-    - **Connection Pooling**: Efficient database connection management
-    - **Static File Security**: Secure serving of user-generated content
+    - **:material-speedometer:{ style="color: #ff5722" } Rate Limiting**: Per-user and per-endpoint throttling
+    - **:material-file-arrow-up-down:{ style="color: #9c27b0" } Request Size Limits**: Protection against large payload attacks
+    - **:material-connection:{ style="color: #2196f3" } Connection Pooling**: Efficient database connection management
+    - **:material-file-lock:{ style="color: #795548" } Static File Security**: Secure serving of user-generated content
 
 ---
 
-## 📈 Scalability Design
+## :material-chart-line:{ style="color: #4caf50" } Scalability Design
 
-!!! tip "Horizontal Scaling"
-    Designed for growth with microservices-ready architecture and cloud deployment.
+!!! tip ":material-arrow-expand-horizontal:{ style="color: #2196f3" } Horizontal Scaling"
+    Designed for growth with microservices-ready architecture and cloud deployment for enterprise-scale applications.
 
 ```mermaid
 graph TB
@@ -422,33 +422,33 @@ graph TB
 
 **Scalability Features:**
 
-=== "🔧 Application Scaling"
+=== ":material-cog:{ style="color: #607d8b" } Application Scaling"
     
-    - **Stateless Design**: No server-side sessions, JWT for authentication
-    - **Docker Containers**: Easy horizontal scaling with container orchestration
-    - **Load Balancing**: Multiple Django instances behind load balancer
-    - **Microservices Ready**: Clear service boundaries for future splitting
+    - **:material-state-machine:{ style="color: #4caf50" } Stateless Design**: No server-side sessions, JWT for authentication
+    - **:material-docker:{ style="color: #2496ed" } Docker Containers**: Easy horizontal scaling with container orchestration
+    - **:material-scale-balance:{ style="color: #ff9800" } Load Balancing**: Multiple Django instances behind load balancer
+    - **:material-hexagon-multiple:{ style="color: #9c27b0" } Microservices Ready**: Clear service boundaries for future splitting
 
-=== "💾 Database Scaling"
+=== ":material-database:{ style="color: #336791" } Database Scaling"
     
-    - **Read Replicas**: Separate read and write database instances
-    - **Connection Pooling**: Efficient database connection management
-    - **Query Optimization**: Indexed queries and relationship optimization
-    - **Caching Strategy**: Redis for session and query result caching
+    - **:material-database-arrow-right:{ style="color: #2196f3" } Read Replicas**: Separate read and write database instances
+    - **:material-connection:{ style="color: #4caf50" } Connection Pooling**: Efficient database connection management
+    - **:material-chart-timeline-variant:{ style="color: #ff9800" } Query Optimization**: Indexed queries and relationship optimization
+    - **:material-cached:{ style="color: #dc382d" } Caching Strategy**: Redis for session and query result caching
 
-=== "🤖 AI Service Scaling"
+=== ":material-brain:{ style="color: #9c27b0" } AI Service Scaling"
     
-    - **Multiple API Keys**: Round-robin across different API keys
-    - **Model Selection**: Dynamic AI model selection based on load
-    - **Retry Logic**: Automatic retry with exponential backoff
-    - **Circuit Breaker**: Fail-fast pattern for external service calls
+    - **:material-key-variant:{ style="color: #ff9800" } Multiple API Keys**: Round-robin across different API keys
+    - **:material-robot-outline:{ style="color: #2196f3" } Model Selection**: Dynamic AI model selection based on load
+    - **:material-repeat:{ style="color: #4caf50" } Retry Logic**: Automatic retry with exponential backoff
+    - **:material-electric-switch:{ style="color: #f44336" } Circuit Breaker**: Fail-fast pattern for external service calls
 
 ---
 
-## 🚀 Deployment Architecture
+## :material-rocket-launch:{ style="color: #e91e63" } Deployment Architecture
 
-!!! success "Production Deployment"
-    Docker-based deployment with CI/CD automation and environment management.
+!!! success ":material-cloud-upload:{ style="color: #4caf50" } Production Deployment"
+    Docker-based deployment with CI/CD automation and environment management for seamless production operations.
 
 ```mermaid
 graph TB
@@ -490,7 +490,7 @@ graph TB
 
 **Deployment Process:**
 
-=== "🔄 Continuous Integration"
+=== ":material-source-branch:{ style="color: #4caf50" } Continuous Integration"
     
     ```yaml
     # GitHub Actions Workflow
@@ -514,99 +514,99 @@ graph TB
               docker push resumate:${{ github.sha }}
     ```
 
-=== "🐳 Container Strategy"
+=== ":material-docker:{ style="color: #2496ed" } Container Strategy"
     
-    - **Multi-Stage Builds**: Optimized production images
-    - **Environment Separation**: Different configurations for dev/staging/prod
-    - **Health Checks**: Container health monitoring and auto-restart
-    - **Volume Management**: Persistent data and log volumes
+    - **:material-layers:{ style="color: #ff9800" } Multi-Stage Builds**: Optimized production images
+    - **:material-earth:{ style="color: #4caf50" } Environment Separation**: Different configurations for dev/staging/prod
+    - **:material-heart-pulse:{ style="color: #f44336" } Health Checks**: Container health monitoring and auto-restart
+    - **:material-harddisk:{ style="color: #607d8b" } Volume Management**: Persistent data and log volumes
 
-=== "📊 Monitoring & Maintenance"
+=== ":material-chart-line:{ style="color: #ff9800" } Monitoring & Maintenance"
     
-    - **Application Logs**: Structured logging with Django logging framework
-    - **Error Tracking**: Centralized error collection and alerting
-    - **Performance Metrics**: Database query optimization and response times
-    - **Backup Strategy**: Automated database backups and recovery procedures
+    - **:material-text-box:{ style="color: #2196f3" } Application Logs**: Structured logging with Django logging framework
+    - **:material-bug:{ style="color: #f44336" } Error Tracking**: Centralized error collection and alerting
+    - **:material-speedometer:{ style="color: #4caf50" } Performance Metrics**: Database query optimization and response times
+    - **:material-backup-restore:{ style="color: #9c27b0" } Backup Strategy**: Automated database backups and recovery procedures
 
 ---
 
-## 💡 Design Decisions & Trade-offs
+## :material-lightbulb:{ style="color: #ffeb3b" } Design Decisions & Trade-offs
 
-!!! abstract "Architectural Choices"
-    Key decisions made for performance, maintainability, and scalability.
+!!! abstract ":material-scale-balance:{ style="color: #2196f3" } Architectural Choices"
+    Key decisions made for performance, maintainability, and scalability in production environments.
 
-=== "🎯 Framework Choice: Django REST Framework"
+=== ":material-target:{ style="color: #4caf50" } Framework Choice: Django REST Framework"
     
     **Why Django REST Framework?**
     
     ✅ **Advantages:**
-    - Rapid API development with built-in serialization
-    - Robust authentication and permission system
-    - Extensive ecosystem and community support
-    - Built-in admin interface for data management
-    - ORM provides database abstraction and migrations
+    - :material-speedometer:{ style="color: #4caf50" } Rapid API development with built-in serialization
+    - :material-shield-check:{ style="color: #2196f3" } Robust authentication and permission system
+    - :material-account-group:{ style="color: #ff9800" } Extensive ecosystem and community support
+    - :material-shield-crown:{ style="color: #9c27b0" } Built-in admin interface for data management
+    - :material-database-cog:{ style="color: #607d8b" } ORM provides database abstraction and migrations
     
     ⚠️ **Trade-offs:**
-    - Higher memory footprint compared to FastAPI
-    - Python GIL limitations for CPU-intensive tasks
-    - Learning curve for Django conventions
+    - :material-memory:{ style="color: #f44336" } Higher memory footprint compared to FastAPI
+    - :material-cpu-64-bit:{ style="color: #ff9800" } Python GIL limitations for CPU-intensive tasks
+    - :material-school:{ style="color: #2196f3" } Learning curve for Django conventions
 
-=== "🗄️ Database Choice: PostgreSQL"
+=== ":material-database:{ style="color: #336791" } Database Choice: PostgreSQL"
     
     **Why PostgreSQL over MongoDB?**
     
     ✅ **Advantages:**
-    - ACID compliance for data integrity
-    - Complex relationships between Users, Resumes, JobApplications
-    - Mature ecosystem with excellent Django integration
-    - Advanced indexing and query optimization
-    - JSON field support for flexible resume content storage
+    - :material-check-circle:{ style="color: #4caf50" } ACID compliance for data integrity
+    - :material-relation-many-to-many:{ style="color: #2196f3" } Complex relationships between Users, Resumes, JobApplications
+    - :material-puzzle:{ style="color: #ff9800" } Mature ecosystem with excellent Django integration
+    - :material-chart-timeline-variant:{ style="color: #9c27b0" } Advanced indexing and query optimization
+    - :material-code-json:{ style="color: #607d8b" } JSON field support for flexible resume content storage
     
     ⚠️ **Trade-offs:**
-    - Vertical scaling limitations
-    - Schema migrations required for structure changes
-    - More complex than NoSQL for simple document storage
+    - :material-arrow-up:{ style="color: #f44336" } Vertical scaling limitations
+    - :material-database-arrow-right:{ style="color: #ff9800" } Schema migrations required for structure changes
+    - :material-complexity:{ style="color: #9c27b0" } More complex than NoSQL for simple document storage
 
-=== "🤖 AI Integration Strategy"
+=== ":material-brain:{ style="color: #9c27b0" } AI Integration Strategy"
     
     **Why Multiple AI Providers?**
     
     ✅ **Advantages:**
-    - Risk mitigation - no single point of failure
-    - Cost optimization - use free models for anonymous users
-    - Performance diversity - different models for different use cases
-    - Rate limit distribution across multiple services
+    - :material-shield-check:{ style="color: #4caf50" } Risk mitigation - no single point of failure
+    - :material-cash:{ style="color: #2196f3" } Cost optimization - use free models for anonymous users
+    - :material-speedometer:{ style="color: #ff9800" } Performance diversity - different models for different use cases
+    - :material-timer:{ style="color: #9c27b0" } Rate limit distribution across multiple services
     
     ⚠️ **Trade-offs:**
-    - Increased complexity in AI service management
-    - Multiple API keys and configurations to maintain
-    - Inconsistent response formats between providers
+    - :material-cog-clockwise:{ style="color: #f44336" } Increased complexity in AI service management
+    - :material-key-variant:{ style="color: #ff9800" } Multiple API keys and configurations to maintain
+    - :material-format-align-center:{ style="color: #607d8b" } Inconsistent response formats between providers
 
-=== "🔐 Authentication Strategy: JWT"
+=== ":material-key:{ style="color: #ff9800" } Authentication Strategy: JWT"
     
     **Why JWT over Session-based Authentication?**
     
     ✅ **Advantages:**
-    - Stateless - no server-side session storage required
-    - Scalable across multiple server instances
-    - Mobile-friendly with token-based approach
-    - Built-in expiration and refresh token support
+    - :material-state-machine:{ style="color: #4caf50" } Stateless - no server-side session storage required
+    - :material-arrow-expand-horizontal:{ style="color: #2196f3" } Scalable across multiple server instances
+    - :material-cellphone:{ style="color: #ff9800" } Mobile-friendly with token-based approach
+    - :material-timer-refresh:{ style="color: #9c27b0" } Built-in expiration and refresh token support
     
     ⚠️ **Trade-offs:**
-    - Token size larger than session IDs
-    - Cannot revoke tokens before expiration
-    - More complex client-side token management
+    - :material-resize:{ style="color: #f44336" } Token size larger than session IDs
+    - :material-cancel:{ style="color: #ff9800" } Cannot revoke tokens before expiration
+    - :material-cog-clockwise:{ style="color: #607d8b" } More complex client-side token management
 
 ---
 
-!!! success "Architecture Summary"
-    ResuMate's architecture successfully balances **performance**, **scalability**, and **maintainability** through:
+!!! success ":material-check-all:{ style="color: #4caf50" } Architecture Summary"
+    **ResuMate's architecture** successfully balances **performance**, **scalability**, and **maintainability** through:
     
-    - **🎯 Clear Separation of Concerns**: Distinct layers for presentation, business logic, and data
-    - **🔧 Modular Design**: Independent apps that can evolve separately
-    - **⚡ Performance Optimization**: Caching, database indexing, and efficient query patterns
-    - **🛡️ Security First**: Multi-layered security with authentication, authorization, and data protection
-    - **📈 Scalability Ready**: Horizontal scaling support with containerization and load balancing
-    - **🚀 DevOps Integration**: Automated CI/CD with testing, building, and deployment pipelines
+    - **:material-target:{ style="color: #4caf50" } Clear Separation of Concerns**: Distinct layers for presentation, business logic, and data
+    - **:material-puzzle:{ style="color: #2196f3" } Modular Design**: Independent apps that can evolve separately
+    - **:material-lightning-bolt:{ style="color: #ffeb3b" } Performance Optimization**: Caching, database indexing, and efficient query patterns
+    - **:material-shield-check:{ style="color: #4caf50" } Security First**: Multi-layered security with authentication, authorization, and data protection
+    - **:material-chart-line:{ style="color: #ff9800" } Scalability Ready**: Horizontal scaling support with containerization and load balancing
+    - **:material-rocket-launch:{ style="color: #e91e63" } DevOps Integration**: Automated CI/CD with testing, building, and deployment pipelines
 
 ---
