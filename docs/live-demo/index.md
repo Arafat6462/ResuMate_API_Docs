@@ -17,23 +17,25 @@
 !!! example "Interactive Demo Areas"
     Experience the full functionality of ResuMate with these live features accessible without registration.
 
-**Public Access (No Auth Required):**
+!!! success "Public Access (No Auth Required)"
+    **Free tier features available for immediate testing**
 
 | Feature | URL | Description | Status |
-|:-------:|:----|:------------|:-------|
-| **🤖 AI Models** | [/api/ai/models/](https://arafat2.me/api/ai/models/) | Available AI models for resume generation | <span class="status-badge success">✅ Live</span> |
-| **👁️ Example Jobs** | [/api/example-job-applications/](https://arafat2.me/api/example-job-applications/) | Sample job applications for demo | <span class="status-badge success">✅ Live</span> |
-| **📋 API Root** | [/api/](https://arafat2.me/api/) | Interactive API browser | <span class="status-badge success">✅ Live</span> |
-| **📖 API Documentation** | [/api/docs/](https://arafat2.me/api/docs/) | Swagger/OpenAPI docs | <span class="status-badge success">✅ Live</span> |
+|---------|-----|-------------|--------|
+| 🤖 **AI Models** | [/api/ai/models/](https://arafat2.me/api/ai/models/) | Available AI models for resume generation | ✅ **Live** |
+| 👁️ **Example Jobs** | [/api/example-job-applications/](https://arafat2.me/api/example-job-applications/) | Sample job applications for demo | ✅ **Live** |
+| 📋 **API Root** | [/api/](https://arafat2.me/api/) | Interactive API browser | ✅ **Live** |
+| 📖 **API Documentation** | [/api/docs/](https://arafat2.me/api/docs/) | Swagger/OpenAPI docs | ✅ **Live** |
 
-**Authenticated Features (Registration Required):**
+!!! warning "Authenticated Features (Registration Required)"
+    **Premium features requiring user account and authentication**
 
 | Feature | Endpoint | Description | Access |
-|:-------:|:---------|:------------|:-------|
-| **📄 Resume Management** | `/api/resumes/` | CRUD operations for resumes | <span class="auth-badge required">🔐 Auth Required</span> |
-| **🤖 AI Generation** | `/api/ai/generate/` | AI-powered resume creation | <span class="auth-badge optional">🔓 Model Dependent</span> |
-| **📊 Job Tracking** | `/api/job-applications/` | Job application management | <span class="auth-badge required">🔐 Auth Required</span> |
-| **👤 User Profile** | `/api/auth/` | User authentication & management | <span class="auth-badge required">🔐 Auth Required</span> |
+|---------|----------|-------------|--------|
+| 📄 **Resume Management** | `/api/resumes/` | CRUD operations for resumes | 🔐 **Auth Required** |
+| 🤖 **AI Generation** | `/api/ai/generate/` | AI-powered resume creation | 🔓 **Model Dependent** |
+| 📊 **Job Tracking** | `/api/job-applications/` | Job application management | 🔐 **Auth Required** |
+| 👤 **User Profile** | `/api/auth/` | User authentication & management | 🔐 **Auth Required** |
 
 ---
 
@@ -177,8 +179,11 @@ graph TD
 
 ### 🚀 Demo Workflow Steps
 
+!!! info "Complete User Journey"
+    Step-by-step guide to experience the full ResuMate workflow from API exploration to resume generation.
+
 | Step | Action | Demo URL | Expected Outcome |
-|:----:|:-------|:---------|:-----------------|
+|------|--------|----------|------------------|
 | **1** | Browse API Root | [/api/](https://arafat2.me/api/) | See all available endpoints |
 | **2** | Check AI Models | [/api/ai/models/](https://arafat2.me/api/ai/models/) | List of AI models & capabilities |
 | **3** | View Example Data | [/api/example-job-applications/](https://arafat2.me/api/example-job-applications/) | Sample job applications |
@@ -195,37 +200,44 @@ graph TD
 !!! info "Live System Architecture"
     The ResuMate application is deployed on production infrastructure with enterprise-grade components.
 
-**Current Deployment Status:**
+!!! success "Current Deployment Status"
+    **Real-time monitoring of all production components**
 
 | Component | Status | Details | Performance |
-|:---------:|:-------|:--------|:------------|
-| **🌐 Web Server** | <span class="status-badge success">✅ Online</span> | Nginx with SSL/TLS | Response time < 200ms |
-| **🐳 Application** | <span class="status-badge success">✅ Running</span> | Django + Gunicorn | 99.9% uptime |
-| **🗄️ Database** | <span class="status-badge success">✅ Active</span> | PostgreSQL 16 | Health checks passing |
-| **🤖 AI Services** | <span class="status-badge success">✅ Connected</span> | Google Gemini + OpenRouter | Multiple models available |
-| **🔒 SSL Certificate** | <span class="status-badge success">✅ Valid</span> | Let's Encrypt | Auto-renewal enabled |
-| **🔐 Security** | <span class="status-badge success">✅ Secured</span> | JWT Authentication | A+ SSL Rating |
+|-----------|--------|---------|-------------|
+| 🌐 **Web Server** | ✅ **Online** | Nginx with SSL/TLS | Response time < 200ms |
+| 🐳 **Application** | ✅ **Running** | Django + Gunicorn | 99.9% uptime |
+| 🗄️ **Database** | ✅ **Active** | PostgreSQL 16 | Health checks passing |
+| 🤖 **AI Services** | ✅ **Connected** | Google Gemini + OpenRouter | Multiple models available |
+| 🔒 **SSL Certificate** | ✅ **Valid** | Let's Encrypt | Auto-renewal enabled |
+| 🔐 **Security** | ✅ **Secured** | JWT Authentication | A+ SSL Rating |
 
 ### 🚀 Performance Metrics
 
-**Real-Time System Performance:**
+!!! tip "Real-Time System Performance"
+    Live monitoring and testing commands to verify system performance and availability.
 
-```bash
-# Check application response time
-curl -w "Response Time: %{time_total}s\n" -o /dev/null -s https://arafat2.me/api/
+!!! example "Performance Testing Commands"
+    **Verify system performance with these real-time tests**
+    
+    ```bash
+    # Check application response time
+    curl -w "Response Time: %{time_total}s\n" -o /dev/null -s https://arafat2.me/api/
 
-# Test SSL certificate
-openssl s_client -connect arafat2.me:443 -servername arafat2.me
+    # Test SSL certificate
+    openssl s_client -connect arafat2.me:443 -servername arafat2.me
 
-# Check API availability
-curl -I https://arafat2.me/api/
-```
+    # Check API availability
+    curl -I https://arafat2.me/api/
+    ```
 
-**Expected Results:**
-- **Response Time:** < 200ms for API endpoints
-- **SSL Score:** A+ rating on SSL Labs
-- **Uptime:** 99.9% availability
-- **API Status:** HTTP 200 OK
+!!! success "Expected Results"
+    **Performance benchmarks and quality metrics**
+    
+    - **Response Time:** < 200ms for API endpoints
+    - **SSL Score:** A+ rating on SSL Labs
+    - **Uptime:** 99.9% availability
+    - **API Status:** HTTP 200 OK
 
 ---
 
@@ -320,7 +332,10 @@ curl -I https://arafat2.me/api/
 !!! example "Browser Testing Links"
     Click these links to test the application directly in your browser.
 
-**Direct API Browser Testing:**
+!!! info "Direct API Browser Testing"
+    **Interactive web interface for comprehensive API exploration**
+
+**Quick Access Links:**
 
 1. **📋 API Root:** [https://arafat2.me/api/](https://arafat2.me/api/)
    - Navigate through all available endpoints
@@ -347,6 +362,12 @@ curl -I https://arafat2.me/api/
 ## 🎯 Feature Showcase
 
 ### 💡 Key Capabilities Demonstration
+
+!!! tip "Feature Showcase"
+    Comprehensive overview of ResuMate's core capabilities and technical implementation.
+
+!!! success "Production Features"
+    **Enterprise-grade functionality with real-time capabilities**
 
 **1. 🤖 AI-Powered Resume Generation**
 - Multiple AI models (Deepseek, GPT-4, etc.)
