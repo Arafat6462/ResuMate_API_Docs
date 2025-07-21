@@ -94,6 +94,9 @@ Production-ready Django REST API with intelligent resume generation, job trackin
 
 ---
 
+<div align="center">
+  <sub>2025&nbsp;|&nbsp;V&nbsp;1.1</sub>
+</div>
 <div align="center" style="margin-top: 0em;">
-  <sub>Made with ❤️ by Arafat. &copy; 2025</sub>
+  <sub>Made with ❤️ by Arafat.</sub>
 </div>
