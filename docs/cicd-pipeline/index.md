@@ -35,14 +35,17 @@ graph TD
 
 ### 🔧 Infrastructure Components
 
+!!! info "Production Infrastructure Stack"
+    Complete overview of our production-grade infrastructure components powering the ResuMate application.
+
 | Component | Technology | Purpose | Status |
-|:---------:|:----------:|:--------|:-------|
-| **☁️ Cloud Provider** | <span class="tech-highlight">DigitalOcean Droplet</span> | Ubuntu 22.04 LTS server hosting | <span class="status-badge success">✅ Active</span> |
-| **🌐 Web Server** | <span class="tech-highlight">Nginx</span> | Reverse proxy & SSL termination | <span class="status-badge success">✅ Active</span> |
-| **🐳 Container Runtime** | <span class="tech-highlight">Docker & Docker Compose</span> | Application containerization | <span class="status-badge success">✅ Active</span> |
-| **🗄️ Database** | <span class="tech-highlight">PostgreSQL 16</span> | Primary data persistence | <span class="status-badge success">✅ Active</span> |
-| **📦 Registry** | <span class="tech-highlight">Docker Hub</span> | Container image storage | <span class="status-badge success">✅ Active</span> |
-| **🔐 SSL Certificate** | <span class="tech-highlight">Let's Encrypt</span> | Free SSL/TLS encryption | <span class="status-badge success">✅ Active</span> |
+|-----------|------------|---------|--------|
+| ☁️ **Cloud Provider** | `DigitalOcean Droplet` | Ubuntu 22.04 LTS server hosting | ✅ **Active** |
+| 🌐 **Web Server** | `Nginx` | Reverse proxy & SSL termination | ✅ **Active** |
+| 🐳 **Container Runtime** | `Docker & Docker Compose` | Application containerization | ✅ **Active** |
+| 🗄️ **Database** | `PostgreSQL 16` | Primary data persistence | ✅ **Active** |
+| 📦 **Registry** | `Docker Hub` | Container image storage | ✅ **Active** |
+| 🔐 **SSL Certificate** | `Let's Encrypt` | Free SSL/TLS encryption | ✅ **Active** |
 
 ---
 
@@ -53,40 +56,47 @@ graph TD
 !!! example "Automated CI/CD Pipeline"
     **Triggers:** Every push to `master` branch • **Duration:** ~5 minutes • **Zero Downtime:** ✅
 
-**Build Stage:**
-```yaml
-- name: Build and push Docker image
-  uses: docker/build-push-action@v5
-  with:
-    context: .
-    push: true
-    tags: arafat6462/resumate:master
-```
+!!! note "Build Stage"
+    **Docker Image Creation and Registry Push**
+    
+    ```yaml
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        tags: arafat6462/resumate:master
+    ```
 
-**Deploy Stage:**
-```bash
-# SSH to production server
-ssh root@arafat2.me
+!!! success "Deploy Stage" 
+    **Production Server Deployment**
+    
+    ```bash
+    # SSH to production server
+    ssh root@arafat2.me
 
-# Pull latest image and deploy
-docker pull arafat6462/resumate:master
-IMAGE_TAG=master docker compose -f docker-compose.prod.yml up -d
+    # Pull latest image and deploy
+    docker pull arafat6462/resumate:master
+    IMAGE_TAG=master docker compose -f docker-compose.prod.yml up -d
 
-# Cleanup old images
-docker image prune -f
-```
+    # Cleanup old images
+    docker image prune -f
+    ```
 
 ### 🔒 Security & Secrets
 
+!!! warning "Sensitive Configuration"
+    All sensitive data is securely managed through GitHub Secrets with proper encryption and access controls.
+
 | Secret Variable | Purpose | Type |
-|:---------------:|:--------|:-----|
-| **DOCKER_HUB_USERNAME** | Docker Hub authentication | Registry |
-| **DOCKER_HUB_TOKEN** | Docker Hub access token | Registry |
-| **DROPLET_HOST** | Production server IP | Server |
-| **DROPLET_SSH_KEY** | Private SSH key | Authentication |
-| **DB_PASSWORD** | Database password | Database |
-| **SECRET_KEY** | Django secret key | Application |
-| **GEMINI_API_KEY** | Google AI API key | External API |
+|-----------------|---------|------|
+| `DOCKER_HUB_USERNAME` | Docker Hub authentication | Registry |
+| `DOCKER_HUB_TOKEN` | Docker Hub access token | Registry |
+| `DROPLET_HOST` | Production server IP | Server |
+| `DROPLET_SSH_KEY` | Private SSH key | Authentication |
+| `DB_PASSWORD` | Database password | Database |
+| `SECRET_KEY` | Django secret key | Application |
+| `GEMINI_API_KEY` | Google AI API key | External API |
 
 ---
 
@@ -94,39 +104,46 @@ docker image prune -f
 
 ### 📦 Production Setup
 
-**Application Container:**
-```dockerfile
-FROM python:3.11-slim-buster
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-COPY . .
-RUN python manage.py collectstatic --noinput
-EXPOSE 8000
-CMD ["/app/entrypoint.sh"]
-```
+!!! tip "Container Configuration"
+    Optimized Docker setup for production deployment with health checks and automatic restarts.
 
-**Docker Compose Production:**
-```yaml
-services:
-  backend:
-    image: arafat6462/resumate:${IMAGE_TAG:-latest}
-    restart: always
-    ports:
-      - "8000:8000"
-    depends_on:
+!!! info "Application Container"
+    **Multi-stage Docker build for optimized production image**
+    
+    ```dockerfile
+    FROM python:3.11-slim-buster
+    WORKDIR /app
+    COPY requirements.txt .
+    RUN pip install --no-cache-dir -r requirements.txt
+    COPY . .
+    RUN python manage.py collectstatic --noinput
+    EXPOSE 8000
+    CMD ["/app/entrypoint.sh"]
+    ```
+
+!!! success "Docker Compose Production"
+    **Service orchestration with health monitoring**
+    
+    ```yaml
+    services:
+      backend:
+        image: arafat6462/resumate:${IMAGE_TAG:-latest}
+        restart: always
+        ports:
+          - "8000:8000"
+        depends_on:
+          db:
+            condition: service_healthy
+
       db:
-        condition: service_healthy
-
-  db:
-    image: postgres:16
-    restart: always
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-```
+        image: postgres:16
+        restart: always
+        healthcheck:
+          test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+          interval: 5s
+          timeout: 5s
+          retries: 5
+    ```
 
 ---
 
@@ -134,31 +151,36 @@ services:
 
 ### 🔒 Production Web Server
 
-**HTTPS Configuration:**
-```nginx
-server {
-    server_name arafat2.me www.arafat2.me;
+!!! abstract "HTTPS & Security Configuration"
+    Enterprise-grade web server configuration with SSL/TLS encryption and security headers.
 
-    location / {
-        proxy_pass http://127.0.0.1:8000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
+!!! example "HTTPS Configuration"
+    **Nginx reverse proxy with SSL termination**
+    
+    ```nginx
+    server {
+        server_name arafat2.me www.arafat2.me;
+
+        location / {
+            proxy_pass http://127.0.0.1:8000;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+
+        listen 443 ssl;
+        ssl_certificate /etc/letsencrypt/live/arafat2.me/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/arafat2.me/privkey.pem;
     }
 
-    listen 443 ssl;
-    ssl_certificate /etc/letsencrypt/live/arafat2.me/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/arafat2.me/privkey.pem;
-}
-
-# HTTP to HTTPS redirect
-server {
-    listen 80;
-    server_name arafat2.me www.arafat2.me;
-    return 301 https://$host$request_uri;
-}
-```
+    # HTTP to HTTPS redirect
+    server {
+        listen 80;
+        server_name arafat2.me www.arafat2.me;
+        return 301 https://$host$request_uri;
+    }
+    ```
 
 ---
 
@@ -183,14 +205,17 @@ gantt
 
 ### 📋 Deployment Checklist
 
+!!! success "Automated Deployment Stages"
+    Complete deployment pipeline with automated checks and validations at each stage.
+
 | Stage | Check | Status | Duration |
-|:-----:|:------|:-------|:--------:|
-| **🏗️ Build** | Docker image creation | ✅ Automated | ~3 min |
-| **📤 Push** | Registry upload | ✅ Automated | ~1 min |
-| **🔐 Auth** | Server SSH connection | ✅ Automated | ~10 sec |
-| **📥 Pull** | Latest image download | ✅ Automated | ~1 min |
-| **🐳 Deploy** | Container orchestration | ✅ Automated | ~30 sec |
-| **🎯 Health** | Service availability | ✅ Automated | ~20 sec |
+|-------|-------|--------|----------|
+| 🏗️ **Build** | Docker image creation | ✅ **Automated** | ~3 min |
+| 📤 **Push** | Registry upload | ✅ **Automated** | ~1 min |
+| 🔐 **Auth** | Server SSH connection | ✅ **Automated** | ~10 sec |
+| 📥 **Pull** | Latest image download | ✅ **Automated** | ~1 min |
+| 🐳 **Deploy** | Container orchestration | ✅ **Automated** | ~30 sec |
+| 🎯 **Health** | Service availability | ✅ **Automated** | ~20 sec |
 
 ---
 
@@ -198,25 +223,31 @@ gantt
 
 ### ⚡ Production Highlights
 
+!!! tip "Enterprise-Grade Features"
+    Production-ready deployment pipeline with industry best practices and security standards.
+
 | Feature | Implementation | Benefit |
-|:-------:|:-------------|:--------|
-| **🔄 Zero Downtime** | <span class="feature-highlight">Rolling Updates</span> | Seamless deployments |
-| **🛡️ Health Checks** | <span class="feature-highlight">PostgreSQL + App</span> | Automatic failure detection |
-| **🔒 SSL/TLS** | <span class="feature-highlight">Let's Encrypt</span> | Secure HTTPS traffic |
-| **📦 Auto Cleanup** | <span class="feature-highlight">Docker Prune</span> | Optimized disk usage |
-| **🔐 Secrets Management** | <span class="feature-highlight">GitHub Secrets</span> | Secure credential storage |
-| **🌐 Reverse Proxy** | <span class="feature-highlight">Nginx</span> | Load balancing & caching |
+|---------|----------------|---------|
+| 🔄 **Zero Downtime** | `Rolling Updates` | Seamless deployments |
+| 🛡️ **Health Checks** | `PostgreSQL + App` | Automatic failure detection |
+| 🔒 **SSL/TLS** | `Let's Encrypt` | Secure HTTPS traffic |
+| 📦 **Auto Cleanup** | `Docker Prune` | Optimized disk usage |
+| 🔐 **Secrets Management** | `GitHub Secrets` | Secure credential storage |
+| 🌐 **Reverse Proxy** | `Nginx` | Load balancing & caching |
 
 ### 📈 Quick Commands
 
+!!! info "Management Commands"
+    Essential commands for monitoring and managing the production environment.
+
 | Purpose | Command | Description |
-|:-------:|:--------|:------------|
-| **🔍 Status** | `docker ps -a` | View containers |
-| **📊 Logs** | `docker logs -f resumate_backend_prod` | Application logs |
-| **🔄 Restart** | `docker-compose restart` | Restart services |
-| **🧹 Cleanup** | `docker system prune -f` | Remove unused resources |
-| **🌐 Nginx** | `sudo nginx -t && sudo systemctl reload nginx` | Test & reload config |
-| **🔒 SSL** | `certbot certificates` | Check certificate status |
+|---------|---------|-------------|
+| 🔍 **Status** | `docker ps -a` | View containers |
+| 📊 **Logs** | `docker logs -f resumate_backend_prod` | Application logs |
+| 🔄 **Restart** | `docker-compose restart` | Restart services |
+| 🧹 **Cleanup** | `docker system prune -f` | Remove unused resources |
+| 🌐 **Nginx** | `sudo nginx -t && sudo systemctl reload nginx` | Test & reload config |
+| 🔒 **SSL** | `certbot certificates` | Check certificate status |
 
 ---
 
