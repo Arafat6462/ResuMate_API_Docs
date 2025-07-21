@@ -139,7 +139,7 @@ erDiagram
     
     - **:material-account-arrow-right:{ style="color: #4caf50" } User ↔ Resume**: One-to-Many (User can have multiple resumes)
     - **:material-account-arrow-right:{ style="color: #2196f3" } User ↔ JobApplication**: One-to-Many (User can have multiple applications) 
-    - **:material-file-arrow-right:{ style="color: #ff9800" } Resume ↔ JobApplication**: One-to-Many (Resume can be used for multiple applications)
+    - **:material-account-arrow-right:{ style="color: #ff9800" } Resume ↔ JobApplication**: One-to-Many (Resume can be used for multiple applications)
     - **:material-account-question:{ style="color: #9c27b0" } Anonymous User Support**: Special user account for non-authenticated resume generation
 
 === ":material-shield-check:{ style="color: #4caf50" } Data Integrity"
@@ -160,7 +160,7 @@ erDiagram
 
 ## :material-swap-horizontal:{ style="color: #4caf50" } API Request Flow
 
-!!! success ":material-pipeline:{ style="color: #2196f3" } Request Processing Pipeline"
+!!! success ":simple-jfrogpipelines:{ style="color: #2196f3" } Request Processing Pipeline"
     Complete request lifecycle from client to response with security, validation, and AI integration for seamless user experience.
 
 ```mermaid
@@ -268,7 +268,7 @@ sequenceDiagram
     <div class="premium-table">
     
     | Component | Technology | Version | Purpose |
-    |:---------:|:----------:|:-------:|:--------|
+    |---|---|---|---|
     | **:material-language-python:{ style="color: #3776ab" } Framework** | <span class="tech-highlight">Django</span> | <span class="version-badge">5.0.14</span> | Web framework & ORM |
     | **:material-api:{ style="color: #4caf50" } API Layer** | <span class="tech-highlight">Django REST Framework</span> | <span class="version-badge">Latest</span> | RESTful API development |
     | **:material-database:{ style="color: #336791" } Database** | <span class="tech-highlight">PostgreSQL</span> | <span class="version-badge">16+</span> | Primary data storage |
@@ -282,7 +282,7 @@ sequenceDiagram
     <div class="premium-table ai-table">
     
     | Service | Provider | Model | Access Level |
-    |:-------:|:--------:|:-----:|:-------------|
+    |---|---|---|---|
     | **:material-brain:{ style="color: #4285f4" } Google Gemini** | <span class="provider-google">Google AI</span> | <span class="model-premium">gemini-2.0-flash-exp</span> | <span class="access-auth">:material-lock:{ style="color: #f44336" } Authenticated (5/day)</span> |
     | **:material-rocket-launch:{ style="color: #ff5722" } Deepseek** | <span class="provider-openrouter">OpenRouter</span> | <span class="model-free">deepseek/deepseek-r1</span> | <span class="access-public">:material-earth:{ style="color: #4caf50" } Public (Unlimited)</span> |
     | **:material-lightning-bolt:{ style="color: #ffeb3b" } Cypher** | <span class="provider-openrouter">OpenRouter</span> | <span class="model-free">teknium/openhermes-2.5</span> | <span class="access-public">:material-earth:{ style="color: #4caf50" } Public (Unlimited)</span> |
@@ -294,7 +294,7 @@ sequenceDiagram
     <div class="premium-table devops-table">
     
     | Component | Technology | Purpose |
-    |:---------:|:----------:|:--------|
+    |---|---|---|
     | **:material-docker:{ style="color: #2496ed" } Containerization** | <span class="tech-highlight">Docker + Compose</span> | Development & deployment |
     | **:material-source-branch:{ style="color: #4caf50" } CI/CD** | <span class="tech-highlight">GitHub Actions</span> | Automated testing & deployment |
     | **:material-web:{ style="color: #009639" } Web Server** | <span class="tech-highlight">Gunicorn + Nginx</span> | Production WSGI server |
@@ -355,7 +355,7 @@ graph LR
 
 === ":material-shield-check:{ style="color: #4caf50" } Data Protection"
     
-    - **:material-environment-variable:{ style="color: #607d8b" } Environment Variables**: Sensitive data stored securely
+    - **:material-lock-outline:{ style="color: #607d8b" } Environment Variables**: Sensitive data stored securely
     - **:material-key-change:{ style="color: #ff9800" } API Key Rotation**: Support for key rotation without downtime
     - **:material-delete-restore:{ style="color: #2196f3" } Soft Deletes**: Data retention for audit and recovery
     - **:material-shield-bug:{ style="color: #f44336" } SQL Injection Protection**: Django ORM prevents SQL injection
