@@ -17,26 +17,30 @@ Production-ready Django REST API with intelligent resume generation, job trackin
 
 <a href="api-docs/" class="section-nav-card api-docs">
 <div class="nav-icon">🔗</div>
-<div class="nav-title">API Docs</div>
+<div class="nav-title">API Docs <span class="nav-arrow">→</span></div>
 <div class="nav-description">REST API reference with authentication & endpoints</div>
+<div class="nav-cta">Click to explore</div>
 </a>
 
 <a href="architecture/" class="section-nav-card architecture">
 <div class="nav-icon">🏗️</div>
-<div class="nav-title">Architecture</div>
+<div class="nav-title">Architecture <span class="nav-arrow">→</span></div>
 <div class="nav-description">Technical design & system components</div>
+<div class="nav-cta">Click to explore</div>
 </a>
 
 <a href="cicd-pipeline/" class="section-nav-card cicd">
 <div class="nav-icon">⚙️</div>
-<div class="nav-title">CI/CD Pipeline</div>
+<div class="nav-title">CI/CD Pipeline <span class="nav-arrow">→</span></div>
 <div class="nav-description">Deployment workflow & infrastructure</div>
+<div class="nav-cta">Click to explore</div>
 </a>
 
 <a href="live-demo/" class="section-nav-card demo">
 <div class="nav-icon">🚀</div>
-<div class="nav-title">Live Demo</div>
+<div class="nav-title">Live Demo <span class="nav-arrow">→</span></div>
 <div class="nav-description">Interactive demo & production showcase</div>
+<div class="nav-cta">Click to explore</div>
 </a>
 
 </div>
