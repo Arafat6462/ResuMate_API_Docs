@@ -8,6 +8,8 @@ repo_url: https://github.com/arafat6462/resumate
 
 theme:
   name: material
+  favicon: assets/images/favicon.svg
+  logo: assets/images/logo.svg
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
