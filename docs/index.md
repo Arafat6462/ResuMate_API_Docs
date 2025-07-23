@@ -98,6 +98,39 @@ Production-ready Django REST API with intelligent resume generation, job trackin
 
 ---
 
-<div align="center" style="margin-top: 0em;">
-  <sub>&copy; 2025 | Made with ❤️ by Arafat | V 1.1</sub>
+<div style="
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  margin-top: 2em; 
+  padding: 2.5em 0 2em 0;
+  position: relative;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(248, 250, 252, 0.8);
+  backdrop-filter: blur(15px);
+">
+  <sub style="
+    font-size: 1em; 
+    color: rgba(0, 0, 0, 0.8); 
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  ">Made with ❤️ by Arafat</sub>
+  
+  <span style="
+    position: absolute; 
+    right: 1.5em; 
+    font-size: 0.65em; 
+    background: rgba(255, 255, 255, 0.6);
+    color: rgba(0, 0, 0, 0.7);
+    padding: 0.4em 1em;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  ">
+    <span style="font-weight: 500; letter-spacing: 0.5px;">© 2025 • v1.2</span>
+  </span>
 </div>
