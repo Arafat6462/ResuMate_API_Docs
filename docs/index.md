@@ -5,7 +5,7 @@
 <h2>AI-Powered Resume Management Platform</h2>
 
 <div class="hero-subtitle">
-Production-ready Django REST API with intelligent resume generation, job tracking, and enterprise-grade authentication
+Production-ready Django REST API with intelligent resume generation, job tracking, and JWT authentication
 </div>
 </div>
 
