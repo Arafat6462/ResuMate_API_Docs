@@ -69,6 +69,8 @@ nav:
       - "api-docs/index.md"
   - "🏗️ Architecture":
       - "architecture/index.md"
+  - "📊 Performance":
+      - "performance/index.md"
   - "⚙️ CI/CD Pipeline":
       - "cicd-pipeline/index.md"
   - "🚀 Live Demo":
