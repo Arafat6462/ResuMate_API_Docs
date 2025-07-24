@@ -7,27 +7,43 @@ description: Detailed performance and stability analysis of the ResuMate API und
 
 # 📊 Performance Load Test Results
 
-<div class="performance-hero">
-  <div class="hero-content">
-    <h2>API Load Test Analysis</h2>
-    <p>Factual performance metrics from a real-world load test simulating 25 concurrent users on a production environment.</p>
+<div class="perf-hero-simple">
+  <div class="hero-header">
+    <div class="hero-badge">🚀 Production Load Test</div>
+    <h2>API Performance Analysis</h2>
+    <p>Real-world performance metrics from 25 concurrent users on live production infrastructure</p>
   </div>
-  <div class="performance-stats">
-    <div class="stat-card success">
+  
+  <div class="perf-stats-grid">
+    <div class="stat-box success">
+      <div class="stat-icon">✅</div>
       <div class="stat-number">100%</div>
       <div class="stat-label">Success Rate</div>
     </div>
-    <div class="stat-card primary">
+    <div class="stat-box primary">
+      <div class="stat-icon">👥</div>
       <div class="stat-number">25</div>
       <div class="stat-label">Peak Users</div>
     </div>
-    <div class="stat-card warning">
+    <div class="stat-box warning">
+      <div class="stat-icon">⚡</div>
       <div class="stat-number">85ms</div>
       <div class="stat-label">Median Response</div>
     </div>
-    <div class="stat-card info">
+    <div class="stat-box info">
+      <div class="stat-icon">📈</div>
       <div class="stat-number">7.2</div>
       <div class="stat-label">Peak RPS</div>
+    </div>
+    <div class="stat-box secondary">
+      <div class="stat-icon">🚀</div>
+      <div class="stat-number">1,314</div>
+      <div class="stat-label">Total Requests</div>
+    </div>
+    <div class="stat-box accent">
+      <div class="stat-icon">⏱️</div>
+      <div class="stat-number">3m 53s</div>
+      <div class="stat-label">Test Duration</div>
     </div>
   </div>
 </div>
@@ -84,42 +100,54 @@ The load test was executed using Locust against a live production deployment to 
 
 ---
 
-## 📈 Overall Performance Metrics
+## 📈 Performance Overview
 
-The API demonstrated exceptional stability and performance, processing **1,314 requests** with **zero failures**. The median response time was a swift **85ms**, showcasing the system's efficiency under significant load.
+<div class="perf-overview">
+  <div class="overview-summary">
+    <h3>🎯 Key Highlights</h3>
+    <p>The API demonstrated exceptional stability and performance, processing <strong>1,314 requests</strong> with <strong>zero failures</strong>. The median response time was a swift <strong>85ms</strong>, showcasing the system's efficiency under significant load.</p>
+  </div>
 
-<div class="metrics-grid">
-  <div class="metric-card">
-    <h4>✅ Success & Throughput</h4>
-    <div class="metric-breakdown">
-      <div class="metric-row">
-        <span>Total Requests:</span>
-        <span class="value-info">1,314</span>
+  <div class="metrics-grid-simple">
+    <div class="metric-card-simple success">
+      <div class="metric-header">
+        <span class="metric-icon">✅</span>
+        <h4>Success & Throughput</h4>
       </div>
-      <div class="metric-row">
-        <span>Failures:</span>
-        <span class="value-good">0 (100% Success)</span>
-      </div>
-      <div class="metric-row">
-        <span>Peak RPS:</span>
-        <span class="value-good">7.2 req/s</span>
+      <div class="metric-data">
+        <div class="data-item">
+          <span class="label">Total Requests</span>
+          <span class="value">1,314</span>
+        </div>
+        <div class="data-item">
+          <span class="label">Failures</span>
+          <span class="value good">0 (100% Success)</span>
+        </div>
+        <div class="data-item">
+          <span class="label">Peak RPS</span>
+          <span class="value good">7.2 req/s</span>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="metric-card">
-    <h4>⏱️ Response Time (ms)</h4>
-    <div class="metric-breakdown">
-      <div class="metric-row">
-        <span>Average:</span>
-        <span class="value-ok">800 ms</span>
+
+    <div class="metric-card-simple warning">
+      <div class="metric-header">
+        <span class="metric-icon">⏱️</span>
+        <h4>Response Time (ms)</h4>
       </div>
-      <div class="metric-row">
-        <span>Median (p50):</span>
-        <span class="value-good">85 ms</span>
-      </div>
-      <div class="metric-row">
-        <span>95th Percentile:</span>
-        <span class="value-warning">7,100 ms</span>
+      <div class="metric-data">
+        <div class="data-item">
+          <span class="label">Average</span>
+          <span class="value warning">800 ms</span>
+        </div>
+        <div class="data-item">
+          <span class="label">Median (p50)</span>
+          <span class="value good">85 ms</span>
+        </div>
+        <div class="data-item">
+          <span class="label">95th Percentile</span>
+          <span class="value warning">7,100 ms</span>
+        </div>
       </div>
     </div>
   </div>
