@@ -36,12 +36,12 @@ Production-ready Django REST API with intelligent resume generation, job trackin
 <div class="nav-cta">Click to explore</div>
 </a>
 
-<a href="live-demo/" class="section-nav-card demo">
+<!-- <a href="live-demo/" class="section-nav-card demo">
 <div class="nav-icon">🚀</div>
 <div class="nav-title">Live Demo <span class="nav-arrow">→</span></div>
 <div class="nav-description">Interactive demo & production showcase</div>
 <div class="nav-cta">Click to explore</div>
-</a>
+</a> -->
 
 <a href="performance/" class="section-nav-card performance">
 <div class="nav-icon">📊</div>
