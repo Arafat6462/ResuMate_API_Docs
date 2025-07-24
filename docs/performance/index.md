@@ -1,11 +1,5 @@
-<!--
----
-title: Performance Load Test Results
-description: Detailed performance and stability analysis of the ResuMate API under simulated production load. This report presents factual data from a Locust load test, showcasing system reliability and response time metrics.
----
--->
 
-# 📊 Performance Load Test Results
+# 📊 API Load Test Results
 
 <div class="perf-hero-simple">
   <div class="hero-header">
@@ -338,7 +332,7 @@ The data shows a direct correlation between the number of concurrent users and t
 ```mermaid
 graph TD
     subgraph User Ramp-Up
-        A[Start<br>**8 Users**] --> B[+30s<br>**18 Users**] --> C[+15s<br>**25 Users**];
+        A[Start<br>8 Users] --> B[+30s<br>18 Users] --> C[+15s<br>25 Users];
     end
     subgraph Median Response Time
         D[1,200 ms] --> E[2,800 ms] --> F[8,000 ms];
