@@ -94,9 +94,11 @@ Production-ready Django REST API with intelligent resume generation, job trackin
 </div>
 
 <div class="feature-card api-design">
-<div class="feature-icon">🎯</div>
-<strong>RESTful API</strong>
-<p>Clean endpoints</p>
+  <div class="feature-icon">
+    <img src="/assets/images/api.png" alt="API Icon" style="height: 1.7em; vertical-align: middle; margin-right: 0.2em;">
+  </div>
+  <strong>RESTful API</strong>
+  <p>Well-documented endpoints for seamless integration</p>
 </div>
 
 </div>
