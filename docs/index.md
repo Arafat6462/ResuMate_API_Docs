@@ -9,7 +9,6 @@ Production-ready Django REST API with intelligent resume generation, job trackin
 </div>
 </div>
 
-
 <div class="nav-section">
 <h2>📚 <strong>Explore Documentation</strong></h2>
 
@@ -53,7 +52,6 @@ Production-ready Django REST API with intelligent resume generation, job trackin
 </div>
 </div>
 
-
 <div class="features-section">
 <h2>⚡ <strong>Key Features</strong></h2>
 
@@ -66,9 +64,19 @@ Production-ready Django REST API with intelligent resume generation, job trackin
 </div>
 
 <div class="feature-card auth-sys">
-<div class="feature-icon">🔐</div>
-<strong>JWT Auth</strong>
-<p>Secure user management & token authentication</p>
+  <div class="feature-icon">
+    <img src="/assets/images/jwt.png" alt="JWT Logo" style="height: 1.7em; vertical-align: middle; margin-right: 0.2em;">
+  </div>
+  <strong>JWT Auth</strong>
+  <p>Secure user management & token authentication</p>
+</div>
+
+<div class="feature-card cache">
+  <div class="feature-icon">
+    <img src="/assets/images/redis.png" alt="Redis Logo" style="height: 1.7em; vertical-align: middle; margin-right: 0.2em;">
+  </div>
+  <strong>Redis Cache</strong>
+  <p>High-performance caching for faster API responses</p>
 </div>
 
 <div class="feature-card job-track">
@@ -77,16 +85,12 @@ Production-ready Django REST API with intelligent resume generation, job trackin
 <p>Application lifecycle management</p>
 </div>
 
-<div class="feature-card deploy">
-<div class="feature-icon">☁️</div>
-<strong>Production Ready</strong>
-<p>Containerized deployment & CI/CD</p>
-</div>
-
 <div class="feature-card database">
-<div class="feature-icon">🗄️</div>
-<strong>PostgreSQL</strong>
-<p>Robust database with optimized queries</p>
+  <div class="feature-icon">
+    <img src="/assets/images/postgresql.png" alt="PostgreSQL Logo" style="height: 1.7em; vertical-align: middle; margin-right: 0.2em;">
+  </div>
+  <strong>PostgreSQL</strong>
+  <p>Robust database with optimized queries</p>
 </div>
 
 <div class="feature-card api-design">
@@ -102,8 +106,6 @@ Production-ready Django REST API with intelligent resume generation, job trackin
 
 !!! success "Developer Contact"
     :material-account-tie:{ style="color: #2196f3" } **Arafat Hossain** • :material-linkedin:{ style="color: #0077b5" } [LinkedIn](https://www.linkedin.com/in/arafat6462) • :material-email:{ style="color: #4caf50" } [arafat6462@gmail.com](mailto:arafat6462@gmail.com) • :material-github:{ style="color: #24292e" } [GitHub](https://github.com/Arafat6462) • :material-api:{ style="color: #ff9800" } [Live API](https://arafat2.me/api) • :material-source-branch:{ style="color: #9c27b0" } [Source Code](https://github.com/Arafat6462/ResuMate)
-
----
 
 <div style="
   display: flex; 
