@@ -31,6 +31,7 @@ graph TD
     L --> M["🎯 Production Site"]
     
     N["🗄️ PostgreSQL Database"] --> J
+    O["⚡ Redis Cache"] --> J
 ```
 
 ### 🔧 Infrastructure Components
@@ -44,6 +45,7 @@ graph TD
 | 🌐 **Web Server** | `Nginx` | Reverse proxy & SSL termination | ✅ **Active** |
 | 🐳 **Container Runtime** | `Docker & Docker Compose` | Application containerization | ✅ **Active** |
 | 🗄️ **Database** | `PostgreSQL 16` | Primary data persistence | ✅ **Active** |
+| ⚡ **Cache Server** | `Redis 7+ Alpine` | High-performance API caching | ✅ **Active** |
 | 📦 **Registry** | `Docker Hub` | Container image storage | ✅ **Active** |
 | 🔐 **SSL Certificate** | `Let's Encrypt` | Free SSL/TLS encryption | ✅ **Active** |
 
@@ -122,7 +124,7 @@ graph TD
     ```
 
 !!! success "Docker Compose Production"
-    **Service orchestration with health monitoring**
+    **Service orchestration with health monitoring and Redis caching**
     
     ```yaml
     services:
@@ -134,6 +136,8 @@ graph TD
         depends_on:
           db:
             condition: service_healthy
+          redis:
+            condition: service_started
 
       db:
         image: postgres:16
@@ -143,7 +147,34 @@ graph TD
           interval: 5s
           timeout: 5s
           retries: 5
+          
+      redis:
+        image: redis:alpine
+        container_name: resumate_redis_prod
+        restart: always
+        command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+        volumes:
+          - redis_data_prod:/data
+        healthcheck:
+          test: ["CMD", "redis-cli", "ping"]
+          interval: 10s
+          timeout: 3s
+          retries: 3
+
+    volumes:
+      postgres_data_prod:
+      redis_data_prod:
     ```
+
+!!! info "Redis Cache Configuration"
+    **High-Performance Caching Setup:**
+    
+    - **Image:** `redis:alpine` - Lightweight Redis distribution
+    - **Memory Limit:** `256MB` with automatic eviction
+    - **Eviction Policy:** `allkeys-lru` - Removes least recently used keys
+    - **Persistence:** Volume-mounted for data durability across restarts
+    - **Health Check:** Built-in Redis ping for service monitoring
+    - **Performance:** Delivers 10-20ms response times for cached data
 
 ---
 

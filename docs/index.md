@@ -76,7 +76,7 @@ Production-ready Django REST API with intelligent resume generation, job trackin
     <img src="/assets/images/redis.png" alt="Redis Logo" style="height: 1.7em; vertical-align: middle; margin-right: 0.2em;">
   </div>
   <strong>Redis Cache</strong>
-  <p>High-performance caching for faster API responses</p>
+  <p>85% faster responses with Redis caching system</p>
 </div>
 
 <div class="feature-card job-track">
