@@ -72,35 +72,37 @@ graph TB
 ## :material-database:{ style="color: #336791" } Database Schema (ERD)
 
 !!! info ":material-relation-many-to-many:{ style="color: #4caf50" } Entity Relationship Diagram"
-    PostgreSQL database with optimized relationships, soft deletes, and audit trails for enterprise-grade data management.
+    PostgreSQL database with Django's built-in auth system, optimized relationships, soft deletes, and comprehensive audit trails for enterprise-grade data management.
 
 ```mermaid
 erDiagram
-    User {
+    auth_user {
         int id PK
         string username UK
         string email
-        string password_hash
-        boolean is_active
-        boolean is_staff
+        string password
+        string first_name
+        string last_name
+        timestamp last_login
         boolean is_superuser
-        datetime date_joined
-        datetime last_login
+        boolean is_staff
+        boolean is_active
+        timestamp date_joined
     }
     
-    Resume {
-        int id PK
+    resume_resume {
+        bigint id PK
         int user_id FK
         string title
         text content
-        datetime created_at
-        datetime updated_at
+        timestamp created_at
+        timestamp updated_at
     }
     
-    JobApplication {
-        int id PK
+    job_tracker_jobapplication {
+        bigint id PK
         int user_id FK
-        int resume_used_id FK
+        bigint resume_used_id FK
         string job_title
         string company_name
         text original_job_description
@@ -109,12 +111,12 @@ erDiagram
         text notes
         boolean is_deleted
         boolean is_example
-        datetime created_at
-        datetime updated_at
+        timestamp created_at
+        timestamp updated_at
     }
     
-    AIModel {
-        int id PK
+    ai_aimodel {
+        bigint id PK
         string display_name UK
         string model_name
         string api_provider
@@ -124,37 +126,198 @@ erDiagram
         int daily_limit
         string response_time_info
         text description
-        datetime created_at
-        datetime updated_at
+        timestamp created_at
+        timestamp updated_at
     }
     
-    User ||--o{ Resume : "owns"
-    User ||--o{ JobApplication : "creates"
-    Resume ||--o{ JobApplication : "used_in"
+    auth_group {
+        int id PK
+        string name UK
+    }
+    
+    auth_permission {
+        int id PK
+        string name
+        int content_type_id FK
+        string codename
+    }
+    
+    django_content_type {
+        int id PK
+        string app_label
+        string model
+    }
+    
+    auth_user ||--o{ resume_resume : "owns"
+    auth_user ||--o{ job_tracker_jobapplication : "creates"
+    resume_resume ||--o{ job_tracker_jobapplication : "used_in"
+    auth_user ||--o{ auth_user_groups : "belongs_to"
+    auth_group ||--o{ auth_user_groups : "contains"
+    auth_user ||--o{ auth_user_user_permissions : "has"
+    auth_permission ||--o{ auth_user_user_permissions : "granted_to"
+    django_content_type ||--o{ auth_permission : "defines"
 ```
 
 **Key Database Features:**
 
 === ":material-key:{ style="color: #ffc107" } Primary Relationships"
     
-    - **:material-account-arrow-right:{ style="color: #4caf50" } User ↔ Resume**: One-to-Many (User can have multiple resumes)
-    - **:material-account-arrow-right:{ style="color: #2196f3" } User ↔ JobApplication**: One-to-Many (User can have multiple applications) 
-    - **:material-account-arrow-right:{ style="color: #ff9800" } Resume ↔ JobApplication**: One-to-Many (Resume can be used for multiple applications)
-    - **:material-account-question:{ style="color: #9c27b0" } Anonymous User Support**: Special user account for non-authenticated resume generation
+    - **:material-account-arrow-right:{ style="color: #4caf50" } auth_user ↔ resume_resume**: One-to-Many (User can have multiple resumes)
+    - **:material-account-arrow-right:{ style="color: #2196f3" } auth_user ↔ job_tracker_jobapplication**: One-to-Many (User can have multiple job applications) 
+    - **:material-account-arrow-right:{ style="color: #ff9800" } resume_resume ↔ job_tracker_jobapplication**: One-to-Many (Resume can be used for multiple applications)
+    - **:material-brain:{ style="color: #9c27b0" } ai_aimodel**: Standalone table for AI model configurations
+    - **:material-security:{ style="color: #f44336" } Django Auth System**: Complete user authentication with groups and permissions
 
 === ":material-shield-check:{ style="color: #4caf50" } Data Integrity"
     
-    - **:material-delete-restore:{ style="color: #ff9800" } Soft Deletes**: JobApplication uses `is_deleted` flag instead of hard deletion
-    - **:material-history:{ style="color: #2196f3" } Audit Trails**: All models include `created_at` and `updated_at` timestamps
-    - **:material-shield-lock:{ style="color: #f44336" } Cascade Protection**: Resume deletion sets JobApplication.resume_used to NULL
+    - **:material-delete-restore:{ style="color: #ff9800" } Soft Deletes**: job_tracker_jobapplication uses `is_deleted` flag instead of hard deletion
+    - **:material-history:{ style="color: #2196f3" } Audit Trails**: All main models include `created_at` and `updated_at` timestamps
+    - **:material-shield-lock:{ style="color: #f44336" } Foreign Key Constraints**: Proper CASCADE behavior with DEFERRABLE INITIALLY DEFERRED
     - **:material-check-bold:{ style="color: #4caf50" } Unique Constraints**: Username and AI model display names enforced at DB level
+    - **:material-example:{ style="color: #9c27b0" } Example Data**: job_tracker_jobapplication includes `is_example` flag for sample data
 
 === ":material-lightning-bolt:{ style="color: #ffeb3b" } Performance Optimizations"
     
-    - **:material-database-arrow-up:{ style="color: #4caf50" } Indexed Fields**: Foreign keys automatically indexed for fast joins
-    - **:material-filter:{ style="color: #2196f3" } Selective Queries**: Default filtering excludes soft-deleted records
-    - **:material-connection:{ style="color: #9c27b0" } Connection Pooling**: PostgreSQL with psycopg2-binary for optimized connections
-    - **:material-chart-line:{ style="color: #ff9800" } Query Optimization**: Django ORM with select_related and prefetch_related
+    - **:material-database-arrow-up:{ style="color: #4caf50" } Auto-Generated IDs**: All tables use PostgreSQL IDENTITY columns for optimal performance
+    - **:material-index:{ style="color: #2196f3" } Indexed Foreign Keys**: All FK relationships automatically indexed for fast joins
+    - **:material-filter:{ style="color: #9c27b0" } Selective Queries**: Default filtering excludes soft-deleted records
+    - **:material-connection:{ style="color: #ff9800" } Connection Pooling**: PostgreSQL with psycopg2-binary for optimized connections
+    - **:material-chart-line:{ style="color: #4caf50" } Query Optimization**: Django ORM with select_related and prefetch_related
+
+---
+
+## :material-table:{ style="color: #336791" } Database Table Structure
+
+!!! note ":material-database-cog:{ style="color: #336791" } PostgreSQL Schema Details"
+    Complete database structure with Django's authentication system, custom applications, and optimized indexes for production performance.
+
+### Core Application Tables
+
+=== ":material-account:{ style="color: #4caf50" } User Management (auth_user)"
+    
+    **Primary user authentication table with Django's built-in user model:**
+    
+    | Field | Type | Constraints | Description |
+    |---|---|---|---|
+    | `id` | `integer` | `PK, IDENTITY` | Auto-generated primary key |
+    | `username` | `varchar(150)` | `UNIQUE, NOT NULL` | Unique username for login |
+    | `email` | `varchar(254)` | `NOT NULL` | User email address |
+    | `password` | `varchar(128)` | `NOT NULL` | Hashed password |
+    | `first_name` | `varchar(150)` | `NOT NULL` | User's first name |
+    | `last_name` | `varchar(150)` | `NOT NULL` | User's last name |
+    | `is_superuser` | `boolean` | `NOT NULL` | Admin privileges flag |
+    | `is_staff` | `boolean` | `NOT NULL` | Staff access flag |
+    | `is_active` | `boolean` | `NOT NULL` | Account active status |
+    | `date_joined` | `timestamp with time zone` | `NOT NULL` | Account creation date |
+    | `last_login` | `timestamp with time zone` | `NULL` | Last login timestamp |
+
+=== ":material-file-document:{ style="color: #2196f3" } Resume Storage (resume_resume)"
+    
+    **User-generated resume content with AI integration:**
+    
+    | Field | Type | Constraints | Description |
+    |---|---|---|---|
+    | `id` | `bigint` | `PK, IDENTITY` | Auto-generated primary key |
+    | `user_id` | `integer` | `FK → auth_user.id` | Resume owner reference |
+    | `title` | `varchar(255)` | `NOT NULL` | Resume title/name |
+    | `content` | `text` | `NOT NULL` | Full resume content (JSON/Markdown) |
+    | `created_at` | `timestamp with time zone` | `NOT NULL` | Creation timestamp |
+    | `updated_at` | `timestamp with time zone` | `NOT NULL` | Last modification timestamp |
+
+=== ":material-briefcase:{ style="color: #ff9800" } Job Applications (job_tracker_jobapplication)"
+    
+    **Job application tracking with soft delete capability:**
+    
+    | Field | Type | Constraints | Description |
+    |---|---|---|---|
+    | `id` | `bigint` | `PK, IDENTITY` | Auto-generated primary key |
+    | `user_id` | `integer` | `FK → auth_user.id` | Application owner reference |
+    | `resume_used_id` | `bigint` | `FK → resume_resume.id, NULL` | Resume used for application |
+    | `job_title` | `varchar(255)` | `NULL` | Position title |
+    | `company_name` | `varchar(255)` | `NULL` | Company name |
+    | `original_job_description` | `text` | `NULL` | Original job posting |
+    | `date_applied` | `date` | `NULL` | Application submission date |
+    | `status` | `varchar(20)` | `NOT NULL` | Application status |
+    | `notes` | `text` | `NULL` | User notes |
+    | `is_deleted` | `boolean` | `NOT NULL` | Soft delete flag |
+    | `is_example` | `boolean` | `NOT NULL` | Example data flag |
+    | `created_at` | `timestamp with time zone` | `NOT NULL` | Creation timestamp |
+    | `updated_at` | `timestamp with time zone` | `NOT NULL` | Last modification timestamp |
+
+=== ":material-brain:{ style="color: #9c27b0" } AI Model Configuration (ai_aimodel)"
+    
+    **AI service configuration and management:**
+    
+    | Field | Type | Constraints | Description |
+    |---|---|---|---|
+    | `id` | `bigint` | `PK, IDENTITY` | Auto-generated primary key |
+    | `display_name` | `varchar(100)` | `UNIQUE, NOT NULL` | User-facing model name |
+    | `model_name` | `varchar(100)` | `NOT NULL` | Actual AI model identifier |
+    | `api_provider` | `varchar(50)` | `NOT NULL` | Provider (google, openrouter) |
+    | `api_key_name` | `varchar(100)` | `NOT NULL` | Environment variable name |
+    | `is_active` | `boolean` | `NOT NULL` | Model availability status |
+    | `login_required` | `boolean` | `NOT NULL` | Authentication requirement |
+    | `daily_limit` | `integer` | `NOT NULL` | Daily usage limit |
+    | `response_time_info` | `varchar(100)` | `NOT NULL` | Performance information |
+    | `description` | `text` | `NOT NULL` | Model description |
+    | `created_at` | `timestamp with time zone` | `NOT NULL` | Creation timestamp |
+    | `updated_at` | `timestamp with time zone` | `NOT NULL` | Last modification timestamp |
+
+### Django System Tables
+
+=== ":material-security:{ style="color: #f44336" } Permission System"
+    
+    **Complete Django authentication and authorization:**
+    
+    - **`auth_group`**: User groups for role-based access
+    - **`auth_permission`**: Granular permission definitions  
+    - **`auth_group_permissions`**: Many-to-many group permissions
+    - **`auth_user_groups`**: User group memberships
+    - **`auth_user_user_permissions`**: Direct user permissions
+    - **`django_content_type`**: Content type framework for permissions
+
+=== ":material-cog:{ style="color: #607d8b" } System Management"
+    
+    **Django framework tables:**
+    
+    - **`django_migrations`**: Database migration tracking
+    - **`django_session`**: Session storage (if using DB sessions)
+    - **`django_admin_log`**: Admin interface action logging
+
+### Database Indexes & Performance
+
+!!! tip ":material-lightning-bolt:{ style="color: #ffeb3b" } Automatic Indexing"
+    **Foreign Key Indexes (Auto-created):**
+    
+    ```sql
+    -- Resume table indexes
+    CREATE INDEX resume_resume_user_id_0b155703 
+        ON resume_resume(user_id);
+    
+    -- Job application table indexes  
+    CREATE INDEX job_tracker_jobapplication_user_id_a3f6cbf6 
+        ON job_tracker_jobapplication(user_id);
+    CREATE INDEX job_tracker_jobapplication_resume_used_id_68776f96 
+        ON job_tracker_jobapplication(resume_used_id);
+    
+    -- Authentication system indexes
+    CREATE INDEX auth_user_groups_user_id_6a12ed8b 
+        ON auth_user_groups(user_id);
+    CREATE INDEX auth_user_user_permissions_user_id_a95ead1b 
+        ON auth_user_user_permissions(user_id);
+    ```
+
+!!! success ":material-shield-check:{ style="color: #4caf50" } Data Integrity"
+    **Foreign Key Constraints with Deferred Checking:**
+    
+    ```sql
+    -- All FK constraints use DEFERRABLE INITIALLY DEFERRED
+    -- for transaction-level consistency checking
+    ALTER TABLE job_tracker_jobapplication
+        ADD CONSTRAINT job_tracker_jobapplication_user_id_a3f6cbf6_fk_auth_user_id 
+        FOREIGN KEY (user_id) REFERENCES auth_user (id)
+        DEFERRABLE INITIALLY DEFERRED;
+    ```
 
 ---
 
@@ -194,7 +357,7 @@ sequenceDiagram
     External-->>AI: AI Response
     AI-->>Django: Processed Content
     
-    Django->>DB: Save Resume
+    Django->>DB: Save Resume (resume_resume table)
     DB-->>Django: Resume ID
     
     Django-->>Client: Response with resume_id and content
@@ -231,7 +394,7 @@ sequenceDiagram
     
     ```python
     # AI Model Selection & Validation
-    model = AIModel.objects.get(
+    model = ai_aimodel.objects.get(
         display_name=request_data['model'],
         is_active=True
     )
@@ -354,7 +517,7 @@ sequenceDiagram
                 }, headers={'X-Cache-Status': 'HIT'})
             
             # Cache miss - fetch from database
-            active_models = AIModel.objects.filter(is_active=True)
+            active_models = ai_aimodel.objects.filter(is_active=True)
             serializer = AIModelSerializer(active_models, many=True)
             cache.set(self.CACHE_KEY, serializer.data, self.CACHE_TIMEOUT)
             
@@ -369,11 +532,30 @@ sequenceDiagram
         **Endpoint:** `/api/example-job-applications/`
         
         ```python
-        # Similar cache implementation
+        # Cache implementation for example job applications
         CACHE_KEY = "example_job_applications_list"
         CACHE_TIMEOUT = 60 * 60  # 1 hour
         
-        # Same caching logic with cache status responses
+        def get(self, request):
+            cached_data = cache.get(self.CACHE_KEY)
+            if cached_data:
+                return Response({
+                    'cache_status': 'HIT (Response from Redis cache)',
+                    'data': cached_data
+                }, headers={'X-Cache-Status': 'HIT'})
+            
+            # Cache miss - fetch example applications
+            example_apps = job_tracker_jobapplication.objects.filter(
+                is_example=True, 
+                is_deleted=False
+            )
+            serializer = JobApplicationSerializer(example_apps, many=True)
+            cache.set(self.CACHE_KEY, serializer.data, self.CACHE_TIMEOUT)
+            
+            return Response({
+                'cache_status': 'MISS (Response from database)',
+                'data': serializer.data
+            }, headers={'X-Cache-Status': 'MISS'})
         ```
 
 !!! tip "Performance Metrics"
@@ -520,9 +702,10 @@ graph TB
 === ":material-database:{ style="color: #336791" } Database Scaling"
     
     - **:material-database-arrow-right:{ style="color: #2196f3" } Read Replicas**: Separate read and write database instances
-    - **:material-connection:{ style="color: #4caf50" } Connection Pooling**: Efficient database connection management
-    - **:material-chart-timeline-variant:{ style="color: #ff9800" } Query Optimization**: Indexed queries and relationship optimization
+    - **:material-connection:{ style="color: #4caf50" } Connection Pooling**: Efficient database connection management with Django CONN_MAX_AGE
+    - **:material-chart-timeline-variant:{ style="color: #ff9800" } Query Optimization**: Indexed foreign keys and relationship optimization
     - **:material-cached:{ style="color: #dc382d" } Caching Strategy**: Redis for API response caching with 85-90% hit ratio
+    - **:material-auto-fix:{ style="color: #9c27b0" } Auto-Generated IDs**: PostgreSQL IDENTITY columns for optimal ID generation
 
 === ":material-brain:{ style="color: #9c27b0" } AI Service Scaling"
     
